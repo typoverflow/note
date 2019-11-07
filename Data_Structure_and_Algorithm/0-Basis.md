@@ -2,6 +2,11 @@
 + O记号：$\exists c>0,n_0>0, \forall n\geq n_0, f(n)\leq c\cdot g(n)$
 + o记号：$\forall c>0, \exists n_0>0,\forall n \geq n_0, f(n)<c\cdot g(n)$
 + 斯特林公式：$n! = \sqrt{2\pi n}\left(\frac ne\right)^n(1+\Theta(\frac 1n))$
++ **主方法**
+  + 对于复杂度递归式$T(n)=aT(\frac nb)+f(n)$
+    + 如果$f(n)$在多项式意义上小于$n^{\log_ba}$，则时间复杂度为$\Theta(n^{\log_ba})$
+    + 如果$f(n)=\Theta(n^{\log_ba})$，则时间复杂度为$\Theta(n^{\log_ba}\lg n)$
+    + 如果$f(n)$在多项式意义上大于$n^{\log_ba}$，且满足正则化条件：存在$0<c<1$，使得对于足够大的$n$，有$af(\frac nb)\leq cf(n)$，则时间复杂度为$\Theta(f(n))$
 
 
 # 抽象数据类型（ADT）

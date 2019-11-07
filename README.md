@@ -1,5 +1,5 @@
 # Note
-This repo cantains notes of courses for undergraduates in School of AI, Nanjing University.
+This repo cantains notes of courses for undergraduates in School of AI, Nanjing University.  
 Dream evolves. Hope we can move forward together!
 ## Content
 + Intro to AI
@@ -11,4 +11,6 @@ Dream evolves. Hope we can move forward together!
 + clrs(solution to *Introduction to Algorithms*)
 + java
 + vim
-
+## Notice
++ Pictures in markdown files are inserted by relative links, so they cannot be displayed properly on Github web page.  
++ Therefore, you are recommended to clone this repo and check these files on your pc.

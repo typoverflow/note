@@ -1,6 +1,6 @@
 # Note
-This repo cantains notes of courses for undergraduates in School of AI, Nanjing University.  
-Dream evolves. Hope we can move forward together!
+This repo contains notes of courses for undergraduates in School of AI, Nanjing University.  
+*Dream evolves*. Hope we can move forward together!
 ## Content
 + Intro to AI
 + Convex Optimization

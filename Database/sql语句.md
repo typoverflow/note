@@ -35,3 +35,5 @@
 ### The Between Predicate
 ### The IS NULL Predicate
 ### The LIKE Predicate
+
+## 除法运算和全称量词

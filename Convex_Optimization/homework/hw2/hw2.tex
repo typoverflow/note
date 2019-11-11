@@ -1,0 +1,348 @@
+\documentclass[a4paper]{article}
+% \usepackage[margin=1.25in]{geometry}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+% \usepackage{ctex}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage[UTF8]{ctex}
+
+\newcommand{\homework}[5]{
+    \pagestyle{myheadings}
+    \thispagestyle{plain}
+    \newpage
+    \setcounter{page}{1}
+    \noindent
+    \begin{center}
+    \framebox{
+        \vbox{\vspace{2mm}
+        \hbox to 6.28in { {\bf Optimization Methods \hfill #2} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\Large \hfill #1 \hfill} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #4}, StudentId: {\rm #5}}}
+        \vspace{2mm}}
+    }
+    \end{center}
+    % \markboth{#4 -- #1}{#4 -- #1}
+    \vspace*{4mm}
+}
+
+
+\newenvironment{solution}
+{\color{blue} \paragraph{Solution.}}
+{\newline \qed}
+
+\begin{document}
+%==========================Put your name and id here==========================
+\homework{Homework 2}{Fall 2019}{Lijun Zhang}{高辰潇}{181220014}
+
+\paragraph{Notice}
+\begin{itemize}
+    \item The submission email is: \textbf{njuoptfall2019@163.com}.
+    \item Please use the provided \LaTeX{} file as a template. If you are not familiar with \LaTeX{}, you can also use Word to generate a \textbf{PDF} file.
+\end{itemize}
+
+\paragraph{Problem 1: First-order Convexity Condition}
+~\\
+If $f$ is a continuous function on some interval $\mathbf{I}$,
+\begin{enumerate}[a)]
+    \item Prove that $f$ is a convex function if and only if $\forall x_1,x_2\in\mathbf{I}$,
+    \begin{equation}\label{equa:1}
+    f\left(\frac{x_1+x_2}{2}\right)\leq \frac{1}{2}[f(x_1)+f(x_2)].
+    \end{equation}
+    \item Prove that $f(x)=e^x$ is a convex function.
+    \item If $m,n>0,p>1$ and $1/p+1/q=1$, prove that $mn\leq\frac{m^p}{p}+\frac{n^q}{q}.$
+\end{enumerate}
+
+\begin{solution}
+    \begin{enumerate}[a)]
+        \item : 充分性：
+        
+                反证，假设有$f\left(\frac{x_1+x_2}{2}\right)\leq \frac{1}{2}[f(x_1)+f(x_2)]$成立但$f(x)$不为凸函数，则$\exists a,b\in\mathbb{I},\exists \theta\in[0,1]$，使得$f(\theta a+(1-\theta)b)>\theta f(a)+(1-\theta)f(b)$.
+
+                令$c = \theta a+ (1-\theta)b$，$\Phi(x)=f(x)-\left[f(a)+\frac{f(b)-f(a)}{b-a}(x-a)\right]$.
+
+                易见$\Phi(a)=\Phi(b)=0$.下面对$\Phi(x)$进行讨论：
+
+                情况一，若$\Phi(x)$在区间$(a, b)$上恒大于0，则$f(\frac{a+b}2)>\frac 12\left[f(a)+f(b)\right]$，矛盾，假设不成立。故$f(x)$为凸函数。
+
+                情况二，若$\Phi(x)$在区间$(a, b)$上不恒大于0，由$\Phi(c)>0$结合零点存在定理知，存在区间$(a, b)$上的零点$d_1, d_2, ...,d_n$。选取其中一段使得函数值恒大于0的区间$(d_i, d_{i+1})$，由情况一知在这个区间上产生矛盾，假设不成立，$f(x)$为凸函数。
+
+                综上所述，$f(x)$为凸函数，充分性得证。
+
+                必要性：
+
+                若$f$为凸函数，取$\theta=\frac 12$，可立即得到$\forall x_1,x_2\in\mathbf{I}$，都有$f\left(\frac{x_1+x_2}{2}\right)\leq \frac{1}{2}[f(x_1)+f(x_2)]$。
+        
+        \item : $\because f(x)=e^x$为凸函数
+        
+                $\Leftrightarrow e^{\frac{x_1+x_2}2}\leq \frac 12(e^{x_1}+e^{x_2})$
+
+                $\Leftrightarrow e^{\frac{x_1-x_2}2}-\frac 12(e^{x_1-x_2}+1)\leq 0$
+
+                令$t=e^\frac {x_1-x_2}2$, 由$-\frac 12 t^2+t-\frac 12\leq 0$知$e^{\frac{x_1-x_2}2}-\frac 12(e^{x_1-x_2}+1)\leq 0$
+
+                因此$f(x)=e^x$为凸函数
+
+        \item : 令$g(x)=-\ln x$，取$\theta=\frac 1p$，则$1-\theta=\frac 1q$.
+        
+                由凸函数定义知，$f(\theta m^p+(1-\theta)n^q)=-\ln(\frac{m^p}p+\frac{n^q}q)\leq\frac 1p(-\ln m^p)+\frac 1q(-\ln n^q)=-\ln(mn)$
+
+                即$\ln(mn)\leq\ln(\frac{m^p}p+\frac{n^q}q)$
+
+                对上式两边取对数即可得到$mn\leq\frac{m^p}{p}+\frac{n^q}{q}$.
+
+
+    \end{enumerate}
+\end{solution}
+
+\paragraph{Problem 2: Second-order Convexity Condition}
+~\\
+Let $\mathcal{D}\subseteq\mathbf{R}^n$ be convex. For a function $f:\mathcal{D}\to\mathbf{R}$ and an $\alpha>0$, we say that $f$ is $\alpha$-exponentially concave, if $\exp(-\alpha f(x))$ is concave on $\mathcal{D}$. Suppose $f:\mathcal{D}\to\mathbf{R}$ is twice differentiable, give the necessary and sufficient condition of that $f$ is $\alpha$-exponentially concave and the detailed proof.
+\begin{solution}
+    
+    充要条件为$\nabla^2f(x)-\alpha\nabla f(x)\nabla f(x)^T\succcurlyeq 0$。证明如下：
+
+    证明：
+    
+    $\nabla^2f(x)-\alpha\nabla f(x)\nabla f(x)^T\succcurlyeq 0$
+
+    $\Leftrightarrow e^{-\alpha f(x)}(\nabla^2f(x)-\alpha\nabla f(x)\nabla f(x)^T) \succcurlyeq 0$
+
+    $\Leftrightarrow -\alpha\left[e^{-\alpha f(x)}(\nabla^2f(x)-\alpha\nabla f(x)\nabla f(x)^T)\right] \preccurlyeq 0$
+
+    $\Leftrightarrow \nabla^2(e^{-\alpha f(x)})\preccurlyeq 0$
+
+    $\Leftrightarrow e^{-\alpha f(x)}$在$\mathcal{D}$上为凹函数
+
+    $\Leftrightarrow f$在D上$\alpha$-exponentially concave.
+
+\end{solution}
+\paragraph{Problem 3: Operations That Preserve Convexity}
+~\\
+Show that the following functions $f:\mathbf{R}^n\rightarrow\mathbf{R}$ are convex.
+\begin{enumerate}[a)]
+    \item $f(x)=\|{Ax-b}\|$, where $A\in \mathbf{R}^{m\times n}, b\in \mathbf{R}^{m}$ and $\|\cdot\|$ is a norm on $\mathbf{R}^{m}$.
+    \item $f(x)=-(\textnormal{det}(A_0+x_1A_1+\cdots+x_nA_n))^{1/m}$, on $\{x|A_0+x_1A_1+\cdots+x_nA_n\succ 0\}$ where $A_i\in\mathbf{S}^m$.
+    \item $f(x)=\mathbf{tr}((A_0+x_1A_1+\cdots+x_nA_n)^{-1})$, on $\{x|A_0+x_1A_1+\cdots+x_nA_n\succ 0\}$ where $A_i\in\mathbf{S}^m$.
+\end{enumerate}
+\begin{solution}
+    \begin{enumerate}[a)]
+        \item : 对于$\forall x_1, x_2\in \mathbb{R}^n $和$ \forall \theta \in [0, 1]$, 有
+        \begin{equation}
+        \begin{aligned}
+            f(\theta x_1+(1-\theta)x_2) 
+            &=\|A[\theta x_1+(1-\theta) x_2]-b\|\\
+            &=\|\theta (Ax_1-b)+(1-\theta)(Ax_2-b)\|\\
+            &\leq \|\theta (Ax_1-b)\|+\|(1-\theta)(Ax_2-b)\|\\
+            &=\theta\|Ax_1-b\|+(1-\theta)\|Ax_2-b\|\\
+            &=\theta f(x_1)+(1-\theta)f(x_2)
+        \end{aligned}
+        \end{equation}
+
+        其中利用了范数的的三角不等式性质和范数的齐次性。由以上证明可知，$f$为凸函数。
+
+        \item : 首先证明函数$h(X)=-\det(X)^{1/m}，X\in\mathbb{S}_{++}^m$关于$X$为凸函数。
+        
+                将$h(X)$的定义域限制在任意一条穿过定义域的直线$A+tB$上，其中$A,B\in \mathbb{S}^m, A\in \mathbb{S}_{++}^{m}$.
+
+                令$g(t)=h(A+tB)=-\det(A+tB)^{1/m}$,则
+
+                \begin{equation}
+                \begin{aligned}
+                    g(t)&=-\det(A+tB)^{1/m}\\
+                    &=-\det(A^{\frac 12}(I+tA^{-\frac 12}BA^{-\frac 12})A^{\frac 12})^{1/m}\\
+                    &=-\det(A)^{1/m}\cdot (\prod_{i=1}^{m}(1+t\lambda_i))^{1/m}\\
+                \end{aligned}
+                \end{equation}
+
+                其中$\lambda_i$为$A^{-\frac 12}BA^{-\frac 12})A^{\frac 12}$的特征值。由于$(\prod_{i=1}^{m}(1+t\lambda_i))^{1/m}$是关于t的几何均值，为$t$的凹函数，因此$g(t)$为关于$t$的凸函数。
+
+                故$h(X)$为关于矩阵$X$的凸函数。
+                
+                又由于函数$A_0+x_1A_1+\cdots+x_nA_n$为$x$的仿射，因此它与$h$的复合函数为凸函数。
+
+        \item : 首先证明函数$h(X)=\mathbf{tr}(X^{-1}), X\in \mathbb{S}_{++}^{m}$为关于$X$的凸函数。
+        
+                采用和b)中相同的思路，令$g(t)=h(A+tB)=\mathbf{tr}((A+tB)^{-1})$，则
+
+                \begin{equation}
+                \begin{aligned}
+                    g(t)&=\mathbf{tr}((A+tB)^{-1})\\
+                    &=\mathbf{tr}(A^{-\frac 12}(I+tA^{-\frac 12}BA^{-\frac 12})^{-1}A^{-\frac 12})\\
+                    &=\mathbf{tr}(A^{-1}(I+tA^{-\frac 12}BA^{-\frac 12})^{-1})\\
+                    &=\mathbf{tr}(A^{-1}(Q(1+t\Lambda) Q^T)^{-1})\\
+                    &=\mathbf{tr}(Q^TA^{-1}Q(1+t\Lambda)^{-1})\\
+                    &=\sum_{i=1}^{m}\frac{(Q^TA^{-1}Q)_{ii}}{1+t\lambda_i}
+                \end{aligned}
+                \end{equation}
+                
+                由于$A\in\mathbb{S}_{++}^{m}$，故$A^{-1}\in\mathbb{S}_{++}^{m}$.又由于$Q$为正交矩阵，故$Q^TA^{-1}Q\in\mathbb{S}_{++}^{m}$.因此$(Q^TA^{-1}Q)_{ii}>0$.
+
+                由以上讨论知，$g(t)$可看作一系列凸函数$\frac 1{1+t\lambda_i}$的非负加权和，故函数$g(t)$为凸函数，$h(X)$为关于X的凸函数。
+
+                由于$f(x)$可看作$h(X)$和仿射函数$A_0+x_1A_1+\cdots+x_nA_n$的复合，因此$f(x)$为凸函数。
+
+    \end{enumerate}
+\end{solution}
+
+\paragraph{Problem 4: Conjugate Function}
+~\\
+Derive the conjugates of the following functions.
+\begin{enumerate}[a)]
+    \item $f(x)=\max\{0,1-x\}.$
+    \item $f(x)=\ln(1+e^{-x}).$
+\end{enumerate}
+\begin{solution}
+    \begin{enumerate}[a)]
+        \item : 由共轭函数的定义知，$f^*(y) = \sup_{x\in \mathbb{R}}\{xy-\max\{0, 1-x\}\}$
+        
+                当$x<1$时，$f^*(y) = \sup\{xy-1+x\}$, 且函数$xy-1+x$在的导数为$y+1$。当$y+1<0$时函数无上界，$y+1\geq0$时上界为$y$.
+
+                当$x\geq 1$时，$f^*(y) = \sup\{xy\}$, 若$y\leq 0$，函数$xy$的上界为$y$，若$y>0$，函数$xy$无上界。
+
+                综合以上讨论可知
+
+                $$ f^*(y)=\left\{
+                \begin{aligned}
+                & y &(y\in [-1, 0]) \\
+                & +\infty &(y \notin [-1, 0]) \\
+                \end{aligned}
+                \right.
+                $$
+
+        \item : $f^*(y) = \sup_{x\in \mathbb{R}} \{xy-\ln(1+e^{-x})\}$
+        
+                令$g(x) = xy-\ln(1+e^{-x})$，则$g'(x)=y+\frac{e^{-x}}{1+e^{-x}}$，显然$y\geq 0$时$g(x)$单调增，无上界。
+
+                当$y\leq -1$时，$g'(x)<0$，因此$g(x)$单调减。又由于$\lim_{x\rightarrow -\infty} g(x)=(y+1)x\rightarrow +\infty$，故此时$g(x)$无上界。
+
+                当$-1 < y<0$时，令$g'(x)=0$，得到$x=\ln(-\frac{y+1}{y})$时$g(x)$取得最大值$(y+1)\ln(y+1)-y\ln(-y)$
+
+                综合以上讨论可知
+
+                $$ f^*(y)=\left\{
+                \begin{aligned}
+                & (y+1)\ln(y+1)-y\ln(-y) &(y\in (-1, 0)) \\
+                & +\infty &(y \notin (-1, 0)) \\
+                \end{aligned}
+                \right.
+                $$
+
+    \end{enumerate}
+\end{solution}
+
+\paragraph{Problem 5: Optimality Condition}
+~\\
+Prove that $x^\star=(1,1,-1)$ is optimal for the optimization problem
+\begin{gather*}
+\begin{matrix}
+\text{minimize~~} & (1/2)x^TPx+q^Tx+r\quad~~\\
+\text{subject to} & -1\leq x_i\leq1,\quad i=1,2,3
+\end{matrix}
+\end{gather*}
+where
+\begin{equation*}
+P=\begin{bmatrix}
+13&12&-2\\
+12&17&~6\\
+-2&~6&12\\
+\end{bmatrix},\quad\quad q=\begin{bmatrix}
+-28.0\\
+-23.0\\
+~13.0\\
+\end{bmatrix},\quad\quad r=1.
+\end{equation*}
+\begin{solution}
+    显然$x^\star$在可行域内。令$f(x) = (1/2)x^TPx+q^Tx+r$，则$\nabla f(x)=P^Tx+q$。
+
+    则$\nabla f(x^\star)=(-1, 0, 5)^T$.任取可行域内一点$y$，则$\nabla f(x)^T(y-x)=5y_3-y_1+6$.
+
+    由于$-1\leq y_1\leq 1$,$-1\leq y_3 \leq 1$
+
+    故$\nabla f(x)^T(y-x)\geq -6+6=0$
+
+    由最优解的一阶判定准则知，点$x^\star=(1, 1, -1)$是原优化问题的最优解。
+\end{solution}
+
+
+\paragraph{Problem 6: Equivalent Problems}
+~\\
+Consider a problem of the form
+\begin{gather}
+\label{quasi}
+\begin{matrix}
+\text{minimize~~} & f_0(x)/\left(c^Tx+d\right)\quad\quad\quad~\\
+\text{subject to} & f_i(x)\leq0,\quad i=1,\dots,m\\
+&Ax=b\quad\quad\quad\quad\quad\quad\quad~~
+\end{matrix}
+\end{gather}
+where $f_0,f_1,\dots,f_m$ are convex, and the domain of the objective function is defined as \[\{x\in\textbf{dom } f_0 ~|~c^Tx+d>0\}.\]
+\begin{enumerate}[a)]
+    \item Show that the problem (\ref{quasi}) is a quasiconvex optimization problem.
+    \item Show that the problem (\ref{quasi}) is equivalent to
+    \begin{gather}
+    \label{convex}
+\begin{matrix}
+\text{minimize~~} & g_0(y,t)\quad\quad\quad\quad\quad\quad\quad\quad~\\
+\text{subject to} & g_i(y,t)\leq0,\quad i=1,\dots,m\\
+&Ay=bt\quad\quad\quad\quad\quad\quad\quad\quad\\
+&c^Ty+dt=1\quad\quad\quad\quad\quad~~
+\end{matrix}
+\end{gather}
+where $g_i(y,t)=tf_i(y/t)$ and $\textbf{dom }g_i=\{(y,t)~|~y/t\in\textbf{dom }f_i,t>0\}$, for $i=0,1,\dots,m$. The variables are $y\in\mathbf{R}^n$ and $t\in\mathbf{R}$.
+  \item Show that the problem (\ref{convex}) is convex.
+\begin{solution}
+    \begin{enumerate}[a)]
+        \item : 为了证明该问题是一个拟凸优化问题，只需要证明目标函数$g_0(x)=\frac{f_0(x)}{c^Tx+d}$是拟凸的，也就只需要证明目标函数的任意非空下水平集为凸集。（空集本身就可以看作是凸的，不做讨论）
+        
+                对于$\forall t\in \mathbb{R}$，令$g_0(x)\leq t$，得到满足该条件的下水平集$S_t=\{x|f_0(x)\leq t(c^Tx+d)\}$
+
+                假设该下水平集非空，任取$x_1, x_2\in S_t$，有$f_0(x_i)\leq t(c^Tx_i+d)$，$i\in\{1, 2\}$
+
+                故对于任意的$\theta\in [0, 1]$，有
+
+                \begin{equation}
+                \begin{aligned}
+                    &f_0(\theta x_1+(1-\theta)x_2)\\
+                    &\leq \theta f_0(x_1)+(1-\theta)f_0(x_2)\\
+                    &\leq\theta t(c^Tx_1+d)+(1-\theta)t(c^Tx_2+d)\\
+                    &=t(c^T(\theta x_1+(1-\theta)x_2)+d)\\
+                \end{aligned}
+                \end{equation}
+
+                即$\theta x_1+(1-\theta)x_2\in S_t$.
+
+                故目标函数的任意非空下水平集均为凸集。
+
+                因此原问题是拟凸优化问题。
+
+        \item : 对于原问题中的任意一点$x$，令$t=\frac{1}{c^Tx+d},y=tx$，下面证明该从$x$到$(y, t)$的映射为双射。
+        
+                对于原问题可行域中的任意一点$x$，对应的$t=\frac{1}{c^Tx+d}>0$，且$y/t=x\in \mathbf{dom} f_i$。同时代入$x=y/t$可发现$(y, t)$满足问题(6)中的所有约束，因此$x$的像$(y, t)$在问题(6)的可行域中。
+                
+                对于$(y, t)$，若在原问题中存在两个不同的$x_1, x_2$与之对应，则有$tx_1=tx_2$，与$x_1,x_2$互异矛盾。因此，上述映射为单射。
+
+                另一方面，对于问题(6)可行域中的任意一点$(y, t)$，其原像为$x=y/t\in \mathbf{dom}f_i$.同时将问题(6)中的$(y, t)$替换为$x$可发现$x$满足原问题的所有约束，因此对于问题(6)可行域中的每一个点$(y, t)$，在原问题的可行域中都存在一个点$x$与$(y, t)$对应。因此，上述映射为满射。
+
+                最后，在上述映射下可以验证二者目标函数值相同。由于$x$到$(y, t)$的映射为双射，由变量替换规则可知原问题和问题(6)等价。
+
+        \item : 对于问题(6)，易见其中的等式约束均为仿射的。
+        
+                由函数$g_i$定义的形式可知，$g_i(x)$为$f_i(x)$的视角函数。由于视角函数与原函数的凹凸性相同，因此$g_i(x)$也是凸函数
+
+                故问题(6)的目标函数、约束函数均为凸函数，且等式约束均为仿射。因此问题(6)为凸优化问题。
+
+    \end{enumerate}
+\end{solution}
+\end{enumerate}
+
+
+\end{document}

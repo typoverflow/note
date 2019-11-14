@@ -12,5 +12,6 @@ This repo contains notes of courses for undergraduates in School of AI, Nanjing 
 + java
 + vim
 ## Notice
-+ Pictures in markdown files are inserted by relative links, so they cannot be displayed properly on Github web page.  
-+ Therefore, you are recommended to clone this repo and check these files on your pc.
++ Latex grammar is not supported in GitHub markdown preview, so you are strongly recommended to
+  + download this repo and use vscode to check these files, or
+  + use Chrome and install the extension [MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima/related).

@@ -239,7 +239,7 @@ WHERE NOT EXISTS (
     FROM Orders o
     WHERE o.cid=Orders.cid
     GROUP BY o.pid
-    HAVING AVG(o.qty<300)
+    HAVING AVG(o.qty)<300
     );
 
 

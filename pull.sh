@@ -1,3 +1,3 @@
 git add ./
-git commit
+git commit -m "merge before pull"
 git pull origin master

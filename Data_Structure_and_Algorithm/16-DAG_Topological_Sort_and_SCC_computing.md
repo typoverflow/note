@@ -43,6 +43,6 @@
   + Run DFS on $G^R$ and record finish times $f$
   + Run DFS on $G$ but in DFSALL, process nodes in decreasing order of $f$
   + Each DFS tree is a SCC of $G$
-+ 时间复杂度：$O(n+m)
++ 时间复杂度：$O(n+m)$
 + 注意点
   + 为什么通过找source的方式寻找sink？因为由结束时间寻找source相较寻找sink更容易

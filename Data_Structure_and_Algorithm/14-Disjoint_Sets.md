@@ -34,8 +34,8 @@
 ---
 # 使用rank和Path Compression的树实现
 + **MakeSet(x)**：创建一个树，根为x，x的rank为0
-+ **Find(x)**[PathCompression]：从x节点向根回溯，将回溯路径上的节点的父节点全部设置为root。
-+ **Union(x, y)**[Union-by-rank]：比较x所在树的根root1和y所在树的根root2，将rank较小的root置为rank较大的root的子节点，并视情况更新根节点的rank。rank实际上就是无视Path Compression的树高度
++ **Find(x)**【PathCompression】：从x节点向根回溯，将回溯路径上的节点的父节点全部设置为root。
++ **Union(x, y)**【Union-by-rank】：比较x所在树的根root1和y所在树的根root2，将rank较小的root置为rank较大的root的子节点，并视情况更新根节点的rank。rank实际上就是无视Path Compression的树高度
 
 ## 性能分析
 + 下面分析任何MekeSet、Find、Union的操作序列具有较小的时间复杂度
@@ -53,6 +53,6 @@
   + ![](img/2019-10-31-03-16-05.png)
   + ![](img/2019-10-31-03-19-09.png)
   + 下面由上面得到的递推关系计算时间复杂度
-  + ![](img/![](img/2019-10-31-03-20-52.png).png)
+  + ![](img/2019-10-31-03-20-52.png)
   + 发现得到的$T(m, n, r)$实际上比之前所猜测的T的上界要更紧确。因此可以考虑将得到的结果作为新的猜测上界进行代入法证明。  
   ![](img/2019-10-31-03-30-05.png)

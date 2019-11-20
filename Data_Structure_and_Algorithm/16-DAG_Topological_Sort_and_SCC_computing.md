@@ -2,9 +2,9 @@
 
 ## Directed Acyclic Graphs(DAG)
 + 有向无环图：适用于解决包含因果关系、等级关系的实际问题
-+ **[Lemma1]：有向图G是无环的充要条件为G的DFS中没有back edge**  
++ **【Lemma1】：有向图G是无环的充要条件为G的DFS中没有back edge**  
   ![](img/2019-11-19-15-07-18.png)
-+ **[Lemma2]：在DAG G中DFS时，对于G中的所有有向边(u, v)，有$u.f>v.f$**
++ **【Lemma2】：在DAG G中DFS时，对于G中的所有有向边(u, v)，有$u.f>v.f$**
   + 分v是白色节点还是黑色节点证明即可，trivial
 
 ### Topological Sort on DAG
@@ -34,7 +34,7 @@
 + **component graph是一个有向无环图(DAG)**，若不然，环中的各连通分量将构成更大的SCC。
 + 如果我们能从component graph当中的sink SCC开始进行遍历，那么遍历过的点都将是sink SCC中的点（根据white path theorem）
 + 为了寻找sink SCC，将G中的所有有向边进行反向，并画出它的component graph $(G^R)^C$，将问题转化为在$(G^R)^C$中寻找source节点
-+ **[Lemma3]：for any edge $(u, v)\in E(G^R)$, if $u\in C_i,v\in C_j$, then $\max_{u\in C_i} {u.f}>max_{v\in C_j}{v.f}$**  
++ **【Lemma3】：for any edge $(u, v)\in E(G^R)$, if $u\in C_i,v\in C_j$, then $\max_{u\in C_i} {u.f}>max_{v\in C_j}{v.f}$**  
   ![](img/2019-11-19-15-37-37.png)
 + 对$G^R$中的节点进行DFS，得到的结束时间最大的节点一定是$G^R$中的source，也就是$G$中的sink，然后在$G^C$中对该节点进行DFS，得到的为$(G^C)$中的sink SCC
 + 去掉该sink SCC后，继续寻找sink SCC即可。由于之前已经对$G^R$进行过遍历，由引理只需要继续找结束时间最大的节点重复上面一个过程即可。

@@ -109,5 +109,5 @@ s.f = time
 ![](img/2019-11-20-15-03-20.png)
 
 #### 一些性质
-+ [Theorem]: 在对无向图G的DFS中，G的每条边都是Tree Edge或Back Edge  
++ **[Theorem]: 在对无向图G的DFS中，G的每条边都是Tree Edge或Back Edge**  
   ![](img/2019-11-20-15-08-46.png)

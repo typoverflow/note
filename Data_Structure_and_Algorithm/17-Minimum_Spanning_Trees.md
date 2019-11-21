@@ -15,7 +15,7 @@
 + An edge **crosses** the cut (S, V-S) if one of its endpoints is in S and the other is in V-S
 + A cut **respects** an edge set A if no edge in A crosses the cut
 + An edge is a **light edge** crossing a cut if the edge has minimum weight among all edges crossing the cut
-+ ***Thm[Cut Property]:Assume A is included in the edge set of some MST, let (S, V-S) be any cut repecting A. If (u, v) is a light edge crossing the cut, then (u, v) is safe for A***.(consider the process of generating MST steps by steps!)
++ ***Thm【Cut Property】:Assume A is included in the edge set of some MST, let (S, V-S) be any cut repecting A. If (u, v) is a light edge crossing the cut, then (u, v) is safe for A***.(consider the process of generating MST steps by steps!)
   + TODO(补充证明)
 + ***Corollary:Assume A is included in some MST, let $G_A$ = (V, A), then $G_A$ is a forest. Then for any connected component in $G_A$, its minimum-weight-outgoing-edge(MWOE) in G is safe for A***.
 + in $G_A$, an edge in a CC is outgoing if it connects to another CC.

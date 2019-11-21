@@ -88,12 +88,12 @@ s.f = time
 
 ### DFS性质
 #### 括号定理(Parenthesis Theorem)
-+ **[Parenthesis Theorem]: Active intervals of two nodes are either: (a) ectirely disjoint, or (b) one is entirely contained within another.**  
++ **【Parenthesis Theorem】: Active intervals of two nodes are either: (a) ectirely disjoint, or (b) one is entirely contained within another.**  
   ![](img/2019-11-20-14-27-38.png)
   + 当$(v.d, v.f)\subset (u.d, u.f)$时，表明v是u的后代。
 
 #### 白路径定理(White-Path Theorem)
-+ [White-Path Theorem]: In the DFS forest, 𝑣 is a descendant of 𝑢 iff when 𝑢 is discovered, there is a path from 𝑢 to 𝑣 containing only WHITE nodes.
++ **【White-Path Theorem】: In the DFS forest, 𝑣 is a descendant of 𝑢 iff when 𝑢 is discovered, there is a path from 𝑢 to 𝑣 containing only WHITE nodes.**
 
 ### 边的分类
 + **Tree Edge**：Edges in the DFS forest.
@@ -109,5 +109,5 @@ s.f = time
 ![](img/2019-11-20-15-03-20.png)
 
 #### 一些性质
-+ **[Theorem]: 在对无向图G的DFS中，G的每条边都是Tree Edge或Back Edge**  
++ 【Theorem】: 在对无向图G的DFS中，G的每条边都是Tree Edge或Back Edge  
   ![](img/2019-11-20-15-08-46.png)

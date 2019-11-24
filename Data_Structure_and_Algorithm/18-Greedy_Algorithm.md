@@ -29,12 +29,12 @@
 + 下面证明贪心法的正确性
 
 #### 证明贪心法的正确性
-+ **【Lemma1】: let a' be the earliest finishing activity in S, then a' is in some optimal solution of the problem.**(greedy property)  
-  TODO(补充lemma1证明)
-+ **【Lemma2】: let a' be the earliest finishing activity in S, let S' be the activities staring after a', then OPT(S')$\cup${a'} is an optimal solution of the problem.**(optimal substructure)  
-  TODO(补充lemma2证明)
++ **【Lemma1】: let $a'$ be the earliest finishing activity in $S$, then $a'$ is in some optimal solution of the problem.**(greedy property)  
+  ![](img/2019-11-25-02-33-49.png)
++ **【Lemma2】: let $a'$ be the earliest finishing activity in $S$, let $S'$ be the activities starting after $a'$, then $OPT(S')$$\cup\{a'\}$ is an optimal solution of the problem.**(optimal substructure)  
+  ![](img/2019-11-25-02-34-24.png)
 + **【Theorem】: The greedy algorithm is correct.**  
-  TODO(补充证明Theorem证明过程)
+  ![](img/2019-11-25-02-34-45.png)
 ---
 ## 贪心算法
 ### optimal substructure
@@ -55,21 +55,21 @@
 + **因此**
   + **最优子结构性质和贪心选择性质保证了贪心算法的正确性**
   + **贪心选择性质保证了运行时间的高效性**
-  + **从我个人来看，最优子结构是更容易成立、更广泛的性质，任何满足最优子结构的问题都可以使用类似分治法的思路去解决，而且贪心选择性质也依赖于最优子结构性质才能成立。但并不是每个问题都有满足贪心选择性质的策略，因此贪心算法的工作量主要在于：*找到这样一种满足贪心选择性质的策略*。**
+  + **最优子结构是更容易成立、更广泛的性质，任何满足最优子结构的问题都可以使用类似分治法的思路去解决，而且贪心选择性质也依赖于最优子结构性质才能成立。但并不是每个问题都有满足贪心选择性质的策略，因此贪心算法的工作量主要在于：*找到这样一种满足贪心选择性质的策略*。**
 
 ---
 ## 背包问题
-+ TODO(问题描述)
++ ![](img/2019-11-25-02-36-45.png)
 
 ### 贪心
 + 贪心策略：每次都拿性价比最高的物体
 + **【Lemma1: greedy-choice】: let $a_m$ be a most efficient item, then in some optimal solution, at least $w_m^\prime=\min{w_m, W}$ pounds of $a_m$ are taken.**  
-  TODO(补充证明)
+  ![](img/2019-11-25-02-36-12.png)
 + **【Lemma2: optimal substructure】: ？？？**
-  TODO(补充引理内容和证明)
+  ![](img/2019-11-25-02-36-29.png)
 
 ## 0-1背包问题
-+ TODO(问题描述)
++ ![](img/2019-11-25-02-37-03.png)
 ### why greedy fail?
 + 最优子结构性质成立
 + 贪心选择性质不成立
@@ -77,17 +77,38 @@
 
 ## 数据压缩问题
 + 问题描述  
-  TODO(补充问题描述)
+  ![](img/2019-11-25-02-37-31.png)
 + prefix-free：任意一个码字都不是另外一个码字的编码前缀
 + 使用变长编码可以有效压缩文件大小。从另一种角度看，定长编码也是prefix-free的，但是并不是最优的变长编码方式
 + 问题在于，如何生成最优变长编码
 ### 生成最优变长编码
 + 事实上，可以用二叉树来可视化一组prefix-free的编码
-+ TODO(补充右边的两个图)
++ ![](img/2019-11-25-02-38-00.png)
 + 最优的编码方式一定是被可视化为满二叉树的编码方式
 + recursively merge the two least frequent chars to the top of the tree
 + 可使用小顶堆来实现  
-  TODO(补充代码)
-+ **【Lemma1: greedy choice】: Let x and y be two least frequent chars, then in some optimal code tree, x and y are siblings and have largesr depth**  
-  TODO(补充证明)
-+ 【Lemma2: optimal substructure】：let x and y be...
+  ```
+  Huffman(C):
+  Build a priority queue Q based on frequency
+  for (i=1 to n-1)
+      Allocate new node z
+      x = z.left = Q.ExtractMin()
+      y = z.right = Q.ExtractMin()
+      z.frequency = x.frequency + y.frequency
+      Q.Insert(z)
+  return Q.ExtractMin()
+  ```
++ **【Lemma1: greedy choice】: Let $x$ and $y$ be two least frequent chars, then in some optimal code tree, $x$ and $y$ are siblings and have largesr depth**  
+  ![](img/2019-11-25-02-39-18.png)
++ **【Lemma2: optimal substructure】：Let 𝑥 and 𝑦 be two least frequent chars in 𝐶. Let 𝐶_𝑧=𝐶−{𝑥,𝑦}+{𝑧} with 𝑓_𝑧=𝑓_𝑥+𝑓_𝑦. Let 𝑇_𝑧 be an optimal code tree for 𝐶_𝑧. Let 𝑇 be a code tree obtained from 𝑇_𝑧 by replacing leaf node 𝑧 with an internal node having 𝑥 and 𝑦 as children. Then, 𝑇 is an optimal code tree for 𝐶.**  
+  ![](img/2019-11-25-02-39-53.png)
+
+## Set Cover
++ 问题描述  
+  ![](img/2019-11-25-02-22-46.png)
++ 贪心策略
+  + 每次都选择能够覆盖最多的未被覆盖的城市，直到完成全部覆盖
+  + ![](img/2019-11-25-02-40-40.png)
+  + 贪心算法的解并不是最优解，但在该问题中能够给出一个较好的近似解
+  + **【Theorem】：Suppose thr optimal solution uses k sets, then the greedy strategy will use at most klgn sets.**  
+    ![](img/2019-11-25-02-28-16.png)

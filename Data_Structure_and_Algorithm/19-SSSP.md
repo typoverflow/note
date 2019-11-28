@@ -5,7 +5,7 @@
 + 任意有向无环图
 
 ## 最短路径问题
-+ TODO(补充问题表示)
++ ![](img/2019-11-28-10-41-14.png)
 + 最短路径？权重最小的路径？
 + 无向图？有向图($w(u, v)\not =w(v, u)$)？
 + $w(u, v)<0$？
@@ -45,13 +45,13 @@ while (!Q.empty())
 + Dijlstra算法也是贪心算法
 
 #### Dijkstra算法的另一种理解
-TODO（）
++ 不断选择一个节点，加入到已知区域中。每次都选择距离源节点最近的节点
 
 ### SSSP in directed graphs with negative weights
 + Dijkstra算法对存在负边的图是不正确的  
-  TODO（补充不正确的说明图示）
-+ 但是
-#### 
+  ![](img/2019-11-28-10-43-21.png)
++ 但是仍然可以通过修正的算法来实现对有向负边图的SSSP计算
+#### Update
 + When processing edge $(u, v)$, execute procedure Update(u, v): v.dist=$\min\{v.dist, u.dist+w(u, v)\}$
 + 这维护了两条重要性质
   + 对于任何一个节点v，v.dist要么是准确的，要么是被过高估计了

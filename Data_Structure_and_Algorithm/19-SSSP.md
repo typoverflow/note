@@ -51,20 +51,23 @@ while (!Q.empty())
 + Dijkstra算法对存在负边的图是不正确的  
   ![](img/2019-11-28-10-43-21.png)
 + 但是仍然可以通过修正的算法来实现对有向负边图的SSSP计算
-#### Update
+#### Relax松弛操作:Update
 + When processing edge $(u, v)$, execute procedure Update(u, v): v.dist=$\min\{v.dist, u.dist+w(u, v)\}$
-+ 这维护了两条重要性质
-  + 对于任何一个节点v，v.dist要么是准确的，要么是被过高估计了
-  + 如果u是从源节点s到v最短路径上的最后一个节点，那么当我们调用Update(u, v)后，v.dist变为正确的估计
-+ 以上两条性质导出，Update(u, v)是正确并且有帮助性的
-  + 【safe】：无论Update的操作顺序是怎样的，v.dist要么是被过高估计，要么是正确的
-  + 【helpful】：With correct sequence of Update, we get correct v.dist
++ 在clrs中，Update操作对应于松弛操作（Relax）。Relax操作具有如下性质
+  + **【三角不等式性质】：对于任何$(u, v)\in E$，有$\sigma(s, v)\leq \sigma(s, u)+w(u, v)$**
+  + **【收敛性质】：对于所有的节点$u\in V$，一旦在某次松弛操作中u.d被设置为$\sigma(s, u)$，即达到最小值，则在之后的松弛操作中u.d不在发生变化**
+  + **【路径松弛性质】：如果$p=\{v_0, v_1, ..., v_k\}$是从源节点$s=v_0$到节点$v_k$的最短路径，且若$v_{k-1}.d$已达到最小值$\sigma(s, v_{k-1})$，则在执行$Relax(v_{k-1}, v_k)$后节点$v_k.d$也取到最小值。因此，在松弛操作序列$(v_0, v_1), (v_1, v_2), ...,(v_{k-1}, v_k)$后，节点$v_k.d$将取到最小值。**
++ 由收敛性质和路径松弛性质可推到一条重要性质：
+  + 在松弛操作序列$(v_0, v_1), (v_1, v_2), ...,(v_{k-1}, v_k)$中间任意插入其他松弛操作，仍将使$v_k.d$取到最小值。
++ 以上性质导出，Update(u, v)是正确并且有帮助性的
+  + **【safe】：无论Update的操作顺序是怎样的，v.dist要么是被过高估计，要么是正确的**
+  + **【helpful】：With correct sequence of Update, we get correct v.dist**
 + 观察到两点：  
   ![](img/2019-11-28-02-31-03.png)
 
 #### Bellman-Ford Algorithm
 + Update all edges
-+ Repeat above step for n-1 times
++ Repeat above step for n-1 times, so that the d values of nodes on any simple path (whose length must be below n) reach their minimum.
 ```python
 BellmanFordSSSP(G, s):
 for each u in V
@@ -82,7 +85,7 @@ for each edge (u, v) in E                     # 判断是否存在负环
 ```
 ![](img/2019-11-28-02-54-47.png)
 + 在预知最短路径深度d的情况下，可以只进行d次repeat。
-+ **Bellman-Ford还可以判断当前图中是否有负环。**循环进行了n-1次后，如果对于某个节点仍然有v.dist>u.dist+w(u, v)，那么图中一定存在负环。
++ **Bellman-Ford还可以判断当前图中是否有负环**。循环进行了n-1次后，如果对于某个节点仍然有v.dist>u.dist+w(u, v)，那么图中一定存在负环。
 
 ### SSSP in DAG with negative weights
 + Bellman-Ford算法的核心思想：在每一个包含某条最短路径的边序列上进行Update

@@ -77,7 +77,6 @@ for (i=A.length downto 2)
     RndQuickSort(A, p, q)
     RndQuickSort(A, q+1, r)
   ```
-## TODO（区分一组概念）
 ## 最坏情况分析
 + 显然，无论概率多小，仍然存在每次都是最差划分的可能性。因此最坏情况下时间复杂度还是$O(n^2)$
 ## 期望运行时间

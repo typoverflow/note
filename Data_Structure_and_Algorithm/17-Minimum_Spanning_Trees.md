@@ -77,7 +77,8 @@ while (Q is not empty)
             v.parent = u, v.dist = w(u, v)
             Q.Update(v, w(u, v))
 ```
-+ 时间复杂度：$O(m\log n)$  
++ 时间复杂度：$O(m\log n)+O(n\lg n)=O(m\lg n)$
++ 如果使用斐波那契堆来实现，则Update操作的时间复杂度可进一步降至$O(1)$。因此时间复杂度可进一步降至$O(m+n\lg n)$  
   ![](img/2019-11-21-12-41-44.png)
 
 ### Borůvka’s Algorithm

@@ -1,0 +1,143 @@
+\documentclass[a4paper]{article}
+% \usepackage[margin=1.25in]{geometry}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+% \usepackage{ctex}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{enumerate}
+
+\newcommand{\homework}[5]{
+    \pagestyle{myheadings}
+    \thispagestyle{plain}
+    \newpage
+    \setcounter{page}{1}
+    \noindent
+    \begin{center}
+    \framebox{
+        \vbox{\vspace{2mm}
+        \hbox to 6.28in { {\bf Optimization Methods \hfill #2} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\Large \hfill #1 \hfill} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #4}, StudentId: {\rm #5}}}
+        \vspace{2mm}}
+    }
+    \end{center}
+    % \markboth{#4 -- #1}{#4 -- #1}
+    \vspace*{4mm}
+}
+
+
+\newenvironment{solution}
+{\color{blue} \paragraph{Solution.}}
+{\newline \qed}
+
+\begin{document}
+%==========================Put your name and id here==========================
+\homework{Homework 3}{Fall 2019}{Lijun Zhang}{Student name}{Student id}
+
+\paragraph{Notice}
+\begin{itemize}
+    \item The submission email is: \textbf{njuoptfall2019@163.com}.
+    \item Please use the provided \LaTeX{} file as a template. If you are not familiar with \LaTeX{}, you can also use Word to generate a \textbf{PDF} file.
+\end{itemize}
+\paragraph{Problem 1: Equality Constrained Least-squares}
+~\\
+Consider the equality constrained least-squares problem
+\begin{gather*}
+\begin{matrix}
+\text{minimize~~} & \frac{1}{2}\|Ax-b\|_2^2\\
+\text{subject to} & Gx=h~~\\
+\end{matrix}
+\end{gather*}
+where $A\in\mathbf{R}^{m\times n}$ with $\mathbf{rank}~A=n$, and $G\in\mathbf{R}^{p\times n}$ with $\mathbf{rank}~G=p$.
+\begin{enumerate}[a)]
+    \item Derive the Lagrange dual problem with Lagrange multiplier vector $v$.
+    \item Derive expressions for the primal solution $x^\star$ and the dual solution $v^\star$.
+\end{enumerate}
+\begin{solution}
+Write your solution here.
+\end{solution}
+
+\paragraph{Problem 2: Support Vector Machines}
+~\\
+Consider the following optimization problem
+\begin{gather*}
+\begin{matrix}
+\text{minimize~~} & \sum_{i=1}^n\max\left(0,1-y_i(w^Tx_i+b)\right)+\frac{\lambda}{2}\|w\|_2^2\\
+\end{matrix}
+\end{gather*}
+where $x_i\in\mathbf{R}^{d},y_i\in \mathbf{R},i=1,\cdots,n$ are given, and $w\in \mathbf{R}^d,b\in\mathbf{R}$ are the variables.
+\begin{enumerate}[a)]
+    \item Derive an equivalent problem by introducing new variables $u_i,i=1,\cdots,n$ and equality constraints \[u_i=y_i(w^Tx_i+b),i=1,\cdots,n.\]
+    \item Derive the Lagrange dual problem of the above equivalent problem.
+    \item Give the Karush-Kuhn-Tucker conditions.
+\end{enumerate}
+
+\noindent\emph{Hint: Let $\ell(x)=\max(0,1-x)$. Its conjugate function $\ell^\ast(y)=\sup\limits_{x}(yx-\ell(x))=\left\{
+\begin{aligned}
+&y, \quad-1\leq y\leq0 \\
+&\infty,\quad\text{otherwise}
+\end{aligned}
+\right.$}
+\begin{solution}
+Write your solution here.
+\end{solution}
+
+\paragraph{Problem 3: Euclidean Projection onto the Simplex}
+~\\
+Consider the following optimization problem
+\begin{gather*}
+\begin{matrix}
+\text{minimize~~} & \frac{1}{2}\left\|y-x\right\|^2_2\quad\\
+\text{subject to} & \mathbf{1}^Ty=r\quad\quad\\
+&y\succeq0\quad\quad\quad
+\end{matrix}
+\end{gather*}
+where $r>0$, $x\in \mathbb{R}^n$ is given, and $y\in \mathbf{R}^n$ is the variable. Give an algorithm to solve this problem and prove the correctness of your algorithm.
+
+\noindent\emph{Hint: Derive the Lagrangian of this problem and apply the Karush-Kuhn-Tucker conditions. If you need more hints, please read the following paper \cite{Wang2013}}
+\begin{solution}
+Write your solution here.
+\end{solution}
+
+\paragraph{Problem 4: Optimality Conditions}
+~\\
+Consider the problem
+\begin{equation*}
+    \begin{split}
+        &\text{minimize~~} \quad  \text{tr}(2X) - \log{\det{(3X)}} \\
+        &\text{subject to} \quad~  2Xs=y
+    \end{split}
+\end{equation*}
+with variable $X \in \mathbf{S}^n$ and domain $\mathbf{S}_{++}^n$. Here, $y \in \mathbf{R}^n$ and $s \in \mathbf{R}^n$ are given, with $s^T y =1$.
+\begin{enumerate}[a)]
+    \item Give the Lagrange and then derive the Karush-Kuhn-Tucker conditions.
+    \item Verify that the optimal solution is given by
+    \begin{equation*}
+        X^\star = \frac{1}{2} \left(I + yy^T - \frac{ss^T}{s^T s}\right) .
+    \end{equation*}
+\end{enumerate}
+
+\begin{solution}
+Write your solution here.
+\end{solution}
+
+
+\begin{thebibliography}{1}
+
+\bibitem{Wang2013}
+Weiran Wang, and Miguel \'{A}. Carreira-Peroi\~{n}\'{a}n.
+\newblock Projection onto the probability simplex: An efficient algorithm with a simple proof, and an application.
+\newblock \emph{arXiv:1309.1541}, 2013.
+
+\end{thebibliography}
+
+\end{document}

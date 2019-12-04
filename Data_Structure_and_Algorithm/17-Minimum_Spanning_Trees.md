@@ -45,7 +45,7 @@ for (each edge (u, v) taken in weight increasing order)
         Union(u, v)
 return A
 ```
-+ 运行时间：$O(m\log^\star n)$  
++ 运行时间：$O(m\log n)$  
   ![](img/2019-11-21-12-08-41.png)
 
 ### Prim's Algorithm

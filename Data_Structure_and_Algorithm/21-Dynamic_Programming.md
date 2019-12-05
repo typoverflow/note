@@ -126,15 +126,35 @@ while n>0
 + 计算最优解的值
   + Top-Down(recursion with memorization), easy.
   + Bottom-Up
+    + 在网格中考虑，最终要解决最右上角的问题，而解决每个问题的前提是它左边和下边的子问题已被解决
     + 可以按照从每个对角线向右走一只走到右边的方法
-    + TODO（补图）
+      ![](img/2019-12-06-06-14-45.png)
++ 构造最优解
+  + 添加数组solution用于记录在计算$A_i...A_j$时我们所选择的k
 ```python
 MatrixChainDP(A1, A2, ..., An):
-for i
+for i=1 to n
+    m[i, j] = 0
+for l=2 to n
+    for i=1 to n-l+1
+        j = i+l-1
+        m[i, j] = INF
+        for k=i to j-1
+            cost = m[i, k]+m[k+1, j] + p[i-1]*p[k]*p[j]
+            if cost < m[i, j]
+                m[i, j] = cost
+                solution[i, j] = k
+return <m, solution>
+
+MatrixChainPrintOpt(solution, i, j):
+if i==j
+    print("Ai")
+else
+    print("(")
+    MatrixChainPrintOpt(solution, i, solution[i, j])
+    MatrixChainPrintOpt(solution, solution[i, j], j)
+    print(")")
 ```
-TODO(完善上述代码)
-+ 构造最优解
-  + 添加数组s用于记录在计算$A_i...A_j$时我们所选择的k
 
 ## 编辑距离（Edit Distance）
 + Given two strings, how similar are they?
@@ -146,21 +166,37 @@ TODO(完善上述代码)
 
 #### 动态规划算法
 + 找到解的递归结构
-  + TODO（补充Step1内容）
+  + 一种可视化编辑操作的方法
+    ![](img/2019-12-06-06-26-10.png)
+    ![](img/2019-12-06-06-28-30.png)
 + 建立备忘机制
   + dist(i, j)表示A[1...i]和B[1...j]之间的edit distance
-+ 找到最优解的结构
-  + TODO(补充Step2的内容)
++ 找到最优解的结构  
+  ![](img/2019-12-06-06-30-04.png)
 + 计算最优解的值
-  + Bottom-Up：从左到右从上到下遍历网格即可  
-    TODO（补图）
-TODO（补充算法代码）
+  + Bottom-Up：由于每一个子问题所依赖的子问题为左方\上方\左上方的网格，因此从左到右从上到下遍历网格即可  
+    ![](img/2019-12-06-06-31-29.png)
 + 构造最优解
+```python
+EditDistDP(A[1...m], B[1...n])
+for i=0 to m
+    dist[i, 0] = i
+for j=0 to n
+    dist[0, j] = j
+for i=1 to m
+    for j=1 to n
+        delDist = dist[i-1, j]+1
+        insDost = dist[i, j-1]+1
+        subDist - dist[i-1, j-1] + Diff(A[i], B[j])
+        dist[i, j] = Min(delDist, insDist, subDist)
+        solution[i, j] = corresponding operation
+return dist
+```
 
 ## 最大独立集
 + Given an undirected graph G=(V, E), an independent set I is a subset of V, such that no vertices in I are adjacent
 + A maximum independent set (MaxIS) is an independent set of maximum size
-+ 下面考虑以r为根的树的最大独立集
++ 由于一般图的最大独立集计算十分困难，因此下面仅考虑以r为根的树的最大独立集
 
 #### 动态规划算法
 + 解的递归结构
@@ -174,8 +210,24 @@ TODO（补充算法代码）
   + $mis(T_u) = max\{mis(T_u, 0), mis(T_u, 1)\}$
 + 计算最优解的值
   + 递归算法
-    + TODO（补充递归结构的算法）
+```python
+MaxISDP(u):
+mis1 = 1
+mis0 = 0
+for each child v of u
+    mis1 = mis1 + MaxISDP(v).mis0
+    mis0 = mis0 + MaxISDP(v).mis
+mis = Max(mis0, mis1)
+return <mis, mis0, mis1>
+```
   + 迭代算法
-    + 是不是可以使用DFS，然后按照结束时间先后计算各节点？
+    + 可以使用DFS，然后按照结束时间来设计迭代顺序
 
 
+---
+## 对动态规划的几点讨论
++ 设计动态规划的解结构和迭代算法时，可考虑结合图和网格等进行考虑
++ 动态规划要求问题一定要**满足最优子结构性质**。
+  + 尽管大多数问题都满足最优子结构性质，但仍有部分问题不满足，例如  
+    ![](img/2019-12-06-06-50-54.png)
+  + 在上面的问题中，**子问题的最优解不是原问题的可行解**。

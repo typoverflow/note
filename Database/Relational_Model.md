@@ -125,7 +125,4 @@
 > solution:  
 > $(C\infty P) where　pid='p01'[C.cname]$
 
-> eg. get names of customers who order at least one product costing $0.5  
-> solution:  
-> T1: todo
 

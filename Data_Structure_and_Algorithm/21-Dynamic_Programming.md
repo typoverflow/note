@@ -223,7 +223,66 @@ return <mis, mis0, mis1>
   + 迭代算法
     + 可以使用DFS，然后按照结束时间来设计迭代顺序
 
+## Subset Sum
++ 给定整数序列X[1, 2, ..., n]，能否找到X的子集，使得子集中元素之和为T？
 
+### 动态规划算法
++ 解的递归结构  
+  ![](img/2019-12-09-02-41-29.png)
++ 最优解的递归结构
+  ![](img/2019-12-09-02-41-48.png)
++ 建立备忘机制
+  + 建立二维数组ss[1...n, 0...T]
++ 伪代码如下
+```python
+SubsetSumDP(X, T):
+ss[n, 0] = True
+for (t=1 to T)
+    ss[n, t] = (X[n]==t)? True:False
+for (i=n-1 downto 1)
+    ss[i, 0] = True
+    for (t=1 to X[i]-1)
+        ss[i, t] = ss[i+1, t]
+    for (t=X[i] to T)
+        ss[i, t] = Or(ss[i+1, t], ss[i+1, t-X[i]])
+return ss[1, T]
+```
++ 时间复杂度为$O(nT)$-----并不一定比$O(2^n)$要好
+---
+## DP中的空间优化
++ 在建立备忘机制后，表格中每个方格所依赖的子项往往只有相邻位置的方格。因此在填表时可以对空间开销进行优化。
+```python
+EditDistDP(A[1...m], B[1...n]):
+for j=0 to n
+    distLast[j] = j         # distLast[j] = dist[i-1, j]
+for i=1 to m
+    disCur[0] = i           # distCur[j] = dist[i, j]
+    for (j=1 to n)
+        delDist = distLast[j]+1
+        insDist = distCur[j-1]+1
+        subDist = distLast[j-1]+Diff(A[i], B[j])
+        distCur[j] = Min(delDist, insDist, subDist)
+    distLast = distCur
+return distCur[n]
+```
+
+### Edit Distance
++ 在备忘表中，每个格子只依赖左边、上边、左上三个方格，因此算完整个表所需空间可以被优化
++ 
++ TODO()
+
+### Floyd Warshell
+TODO()
+
+---
+## DP算法的正确性分析
++ 实际上只需要证明问题具有最优子结构性质即可
++ 特殊地，如果使用迭代解决动态规划问题，需要证明当前问题以来的子问题已被解决
+
+## DP算法的复杂度分析
++ 时间复杂度
+  + 迭代版本：易证
+  + 递归版本：需要考虑子问题图的大小。如果在子问题图的每个边上花费常数时间，那么时间复杂度为子问题图的大小
 ---
 ## 对动态规划的几点讨论
 + 设计动态规划的解结构和迭代算法时，可考虑结合图和网格等进行考虑

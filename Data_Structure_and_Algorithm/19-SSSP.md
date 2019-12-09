@@ -24,7 +24,7 @@
 + 对于源节点s，$T_s=0$
 + 如果节点u被访问到，那么对于每一条边$(u, v)$，更新$T_v=\min\{T_v, T_u+w(u, v)\}$
 + 每次取出$T_u$最小的节点进行访问，使用最小堆实现即可
-+ 遍历结束后，每个节点的$T_u$即为该节点到源节点的最短路径长度
++ 遍历结束后，每个节点的$T_u$即为源节点到该节点的最短路径长度
 
 #### Dijkstra's Algorithm
 ```python
@@ -85,7 +85,7 @@ for each edge (u, v) in E                     # 判断是否存在负环
         return "Negative Cycle!"
 ```
 ![](img/2019-11-28-02-54-47.png)
-+ 在预知最短路径深度d的情况下，可以只进行d次repeat。
++ 在预知最短路径深度d的情况下，可以只进行d次repeat。或者在某次更新后各节点的dist值不再发生变化时，即可终止算法。
 + **Bellman-Ford还可以判断当前图中是否有负环**。循环进行了n-1次后，如果对于某个节点仍然有v.dist>u.dist+w(u, v)，那么图中一定存在负环。
 
 ### SSSP in DAG with negative weights

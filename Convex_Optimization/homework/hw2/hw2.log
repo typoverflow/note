@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.9.26)  6 NOV 2019 20:43
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.12.5)  9 DEC 2019 19:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -6,7 +6,7 @@ entering extended mode
 **hw2
 (./hw2.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 26 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -1630,12 +1630,12 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 348.
  ) 
 Here is how much of TeX's memory you used:
- 27492 strings out of 493007
- 531184 string characters out of 6136719
- 595378 words of memory out of 5000000
- 31227 multiletter control sequences out of 15000+600000
+ 27492 strings out of 494558
+ 531184 string characters out of 6167440
+ 591620 words of memory out of 5000000
+ 31130 multiletter control sequences out of 15000+600000
  536478 words of font info for 63 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
+ 264 hyphenation exceptions out of 8191
  53i,15n,74p,10405b,576s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on hw2.pdf (6 pages).

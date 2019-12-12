@@ -122,7 +122,7 @@ while n>0
 + 建立备忘机制
   + 令$m[i, j]$表示计算$A_i...A_j$的最小代价
 + 找到最优解的递归结构
-  + $m[i, j] = min_{1\leq k < j}(m[i, k]+m[k+1, j]+p_{i-1}p_kp_j)$
+  + $m[i, j] = min_{i\leq k < j}(m[i, k]+m[k+1, j]+p_{i-1}p_kp_j)$
 + 计算最优解的值
   + Top-Down(recursion with memorization), easy.
   + Bottom-Up

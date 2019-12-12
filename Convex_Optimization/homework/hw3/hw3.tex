@@ -147,22 +147,40 @@ where $x_i\in\mathbf{R}^{d},y_i\in \mathbf{R},i=1,\cdots,n$ are given, and $w\in
                     &-\infty \quad otherwise
                 \end{aligned}\right.$
 
-                因此$g(v)=\sum_{i=1}^n v_i+\frac 1{2\lambda}(\sum_{i=1}^nv_iy_ix_i)^T(\sum_{i=1}^nv_iy_ix_i)-\sum_{i=1}^n \frac 1\lambda v_i^2y_i^2x_i^Tx_i$，其中$v_i\in[0, 1],v_iy_i=0, i\in\{1, ...,n\}$
+                因此$g(v)=\sum_{i=1}^n v_i+\frac 1{2\lambda}||\sum_{i=1}^nv_iy_ix_i||_2^2-\sum_{i=1}^n[(\sum_{i=1}^n \frac 1\lambda v_i^2y_i^2x_i^T)x_i]=\sum_{i=1}^n v_i-\frac 1{2\lambda}v_i^2y_i^2\sum_{i=1}^nx_i^T\sum_{i=1}^nx_i$，其中$v_i\in[0, 1],v_iy_i=0, i\in\{1, ...,n\}$
 
                 故对偶问题为：
                 \begin{equation}
                     \begin{split}
-                        &\text{maximize} \ \ g(v)=\sum_{i=1}^n v_i+\frac 1{2\lambda}(\sum_{i=1}^nv_iy_ix_i)^T(\sum_{i=1}^nv_iy_ix_i)-\sum_{i=1}^n \frac 1\lambda v_i^2y_i^2x_i^Tx_i\\
+                        &\text{maximize} \ \ g(v)=\sum_{i=1}^n v_i-\frac 1{2\lambda}v_i^2y_i^2\sum_{i=1}^nx_i^T\sum_{i=1}^nx_i\\
                         &\text{subject}\ \text{to}\quad 0\leq v_i\leq 1\\
                         &\quad \quad\quad\quad \quad\quad y_iv_i=0\\
                     \end{split}
                 \end{equation}
 
-        \item 解：KKT条件为：
-            \begin{enumerate}[1)]
-                \item $u^\star_i=y_i((w^\star)^Tx_i+b)$, $i\in\{1, ...,n\}$
-                \item 
-            \end{enumerate}
+        \item 解：KKT条件中的第五项要求拉格朗日函数对原问题变量可微。然而，拉格朗日函数对原问题中的变量$u_i$不可导,因此对于变量$u_i,i\in\{1, 2, ...,n\}$，可回退到拉格朗日对变量$u_i$取极小的过程进行讨论。
+
+                由于拉格朗日函数为$L(v, u_i, w)=\sum_{i=1}^n\max(0, 1-u_i)+\frac \lambda 2\|w\|_2^2 + \sum_{i=1}^n v_i[u_i-y_i(w^Tx_i + b)]$，因此拉格朗日对变量$u_i$取极小只需要考虑$\max(0, 1-u_i)+v_iu_i$取极小的过程。
+
+                若$u_i\geq 1$，则$\max(0, 1-u_i)+v_iu_i=v_iu_i$，极小值$v_i$在$u_i=1$时取得。
+
+                若$u_i< 1$，则$\max(0, 1-u_i)+v_iu_i=1-u_i+v_iu_i=1+(v_i-1)u_i\geq 1+v_i-1> v_i$，因此$u_i<1$时$\max(0, 1-u_i)+v_iu_i>v_i$
+
+                因此当且仅当$u_i=1$时，拉格朗日函数对该变量取得最小值。故对于变量$u_i$，它的KKT条件为$u_i^\star=1$.
+
+                由于拉格朗日函数对其余变量均可微，直接对其余变量求出梯度即可。
+
+                综上，KKT条件为：
+
+                $u_i^\star=y_i(w^Tx_i+b), i=1, ...,n$
+
+                $u_i^\star=1, i=1, ...,n$
+
+                $\lambda w^\star-\sum_{i=1}^nv_i^\star y_ix_i=0$
+
+                $y_iv_i^\star=0, i=1, ...,n$
+
+                并且，$v_i^\star$需要满足可行性要求：$v_i^\star\in [0, 1], i=1, ...,n$.
     \end{enumerate}
 \end{solution}
 
@@ -187,11 +205,11 @@ where $r>0$, $x\in \mathbb{R}^n$ is given, and $y\in \mathbf{R}^n$ is the variab
         \REQUIRE $r>0,x\in \mathbb{R}^n=(x_1, x_2, ...,x_n)$
         \STATE Sort $x$ into $u$: $u_1\geq u_2\geq...\geq u_n$
         \STATE $j=1$
-        \WHILE{$u_j+\frac 1j(1-\sum_{i=1}^ju_i)>0$}
+        \WHILE{$u_j+\frac 1j(r-\sum_{i=1}^ju_i)>0$}
             \STATE $j=j+1$
         \ENDWHILE
         \STATE $\rho = j-1$
-        \STATE Define $v=-\frac 1\rho (1-\sum_{i=1}^\rho u_i)$
+        \STATE Define $v=-\frac 1\rho (r-\sum_{i=1}^\rho u_i)$
         \ENSURE optimal $y^\star \text{s.t.} y_i=\max\{x_i-v ,0\}, i=1, ...,n$.
     \end{algorithmic}
 \end{algorithm}
@@ -231,7 +249,7 @@ where $r>0$, $x\in \mathbb{R}^n$ is given, and $y\in \mathbf{R}^n$ is the variab
     
     按照原本各维度的对应关系相应地排序最优解，设最优解为$y^\star={y_1, ...,y_n}$。由上述分析知，在$\lambda_i\geq 0$的情况下数值较小的$u_i$一定对应着较小的$y_i$. 因此有$y_1\geq y_2\geq ...\geq y_{\rho} > y_{\rho+1}=...=y_n=0$.
 
-    又由于$1^Ty^\star=y_1+y_2+...+y_{\rho}$,且对于$y_1, ...,y_m$有$y_i=x_i-v^\star$，因此$\sum_{i=1}^\rho(u_i-v^\star)=1$, $v^\star=-\frac 1\rho (1-\sum_{i=1}^\rho u_i)$
+    又由于$1^Ty^\star=y_1+y_2+...+y_{\rho}$,且对于$y_1, ...,y_m$有$y_i=x_i-v^\star$，因此$\sum_{i=1}^\rho(u_i-v^\star)=r$, $v^\star=-\frac 1\rho (r-\sum_{i=1}^\rho u_i)$
 
     为了确定$v^\star$，还需要确定$\rho$的大小。对于$j\in\{1, 2, ...,n\}$分三种情况考虑：
 
@@ -239,8 +257,8 @@ where $r>0$, $x\in \mathbb{R}^n$ is given, and $y\in \mathbf{R}^n$ is the variab
 
     \begin{equation}
         \begin{split}
-            &\frac 1j(1-\sum_{i=1}^ju_i)+u_j\\
-            &=\frac 1j(1-\sum_{i=1}^\rho u_i+\sum_{j+1}^\rho u_i+ju_j)\\
+            &\frac 1j(r-\sum_{i=1}^ju_i)+u_j\\
+            &=\frac 1j(r-\sum_{i=1}^\rho u_i+\sum_{j+1}^\rho u_i+ju_j)\\
             &=\frac 1j(-\rho v^\star+\sum_{i=j+1}^\rho u_i+ju_j)\\
             &=\frac 1j(j(u_j-v^\star)+\sum_{i=j+1}^\rho(u_i-v^\star))
         \end{split}
@@ -252,8 +270,8 @@ where $r>0$, $x\in \mathbb{R}^n$ is given, and $y\in \mathbf{R}^n$ is the variab
 
     \begin{equation}
         \begin{split}
-            &\frac 1j(1-\sum_{i=1}^ju_i)+u_j\\
-            &=\frac 1j(1-\sum_{i=1}^\rho u_i-\sum_{\rho+1}^j u_i+ju_j)\\
+            &\frac 1j(r-\sum_{i=1}^ju_i)+u_j\\
+            &=\frac 1j(r-\sum_{i=1}^\rho u_i-\sum_{\rho+1}^j u_i+ju_j)\\
             &=\frac 1j(-\rho v^\star-\sum_{i=\rho+1}^j u_i+ju_j)\\
             &=\frac 1j(j(u_j-v^\star)-\sum_{i=\rho+1}^j(u_i-v^\star))
         \end{split}
@@ -263,7 +281,7 @@ where $r>0$, $x\in \mathbb{R}^n$ is given, and $y\in \mathbf{R}^n$ is the variab
 
     c) 若$j=\rho$，则有
         
-    $\frac 1\rho(1-\sum_{i=1}^\rho u_i)+u_{\rho}=\frac 1\rho(\rho(u_\rho-v))>0$.
+    $\frac 1\rho(r-\sum_{i=1}^\rho u_i)+u_{\rho}=\frac 1\rho(\rho(u_\rho-v))>0$.
 
     因此，算法第3-6行通过判断$\frac 1j(1-\sum_{i=1}^ju_i)+u_j$的正负性，找到使该式为正值的最大的下标，该下标即为$\rho$. 再由$v^\star=-\frac 1\rho (1-\sum_{i=1}^\rho u_i)$可进一步计算出$v^\star$（算法的第7行）。
 
@@ -324,7 +342,13 @@ with variable $X \in \mathbf{S}^n$ and domain $\mathbf{S}_{++}^n$. Here, $y \in 
                                 \end{split}
                             \end{equation}
                 
-                因此题目所给定的$X$满足KKT条件。又由于$X\succ 0$，故$X$是原问题的最优解。
+                因此题目所给定的$X$满足KKT条件。
+                
+                又由于$x^\star=\frac 12(I+\frac{ys^T}{||s||_2}-\frac{ss^T}{s^Ts})(I+\frac{ys^T}{||s||_2}-\frac{ss^T}{s^Ts})^T$，因此$X^\star \succ 0$.
+
+                故题目所给定的$X$为原问题的最优解。
+
+                
 
 
 

@@ -46,3 +46,44 @@ return f
   **(b) Residual graph $G_f$ has no augmenting path**  
   **(c) $|f|=c(S, T)$ for some $cut(S, T)$ of $G$**
 + TODO
+
+### 复杂度分析
++ 令$G$为连通图，因此$|E|=m>n=|V|$
++ 初始化步骤（寻找一条通路）需要$O(m)$时间
++ 每一轮只需要遍历一次图即可维护残留网络，因此每次迭代的代价为$O(m)$
++ 下面讨论迭代次数
+  + 若流量均为**整数**
+    + 由于每次迭代最大流$f$均至少增加1，因此至多有$O(f_{OPT})$次迭代
+    + 故时间复杂度为$O(m\cdot f_{OPT})$
+    + 极端情况下（每次增加一）的一个例子如图
+    + TODO（补图，每次增加1）
+  + 若流量为**有理数**
+    + 类似前一种情况
+    + TODO（补充）
+  + 若流量为**正实数**
+    + Ford-Fulkerson算法可能无法终止（不断找到增强流），甚至无法收敛到最大流
+    + 例如下图
+    + TODO（补图）
+
+## Max-Flow Min-cut and LP Duality
++ 最大流问题可被建模为线性规划问题P
++ 因此P一定有一个对偶问题D
++ 根据强对偶性：$OPT(P)=OPT(D)$
++ 然而D并不完全是最小割问题。最小割问题还要求是整数，因此D实际上是最小割问题的一个放松
+
+---
+## 改进Ford-Fulkerson算法
+### 方法一
++ 在选择增强流时，每次都选择瓶颈值最大的增强流
+  + TODO（补充选择方法）
++ 下面评估算法性能
+  + **【Flow Decomposition】：Given $G$ and a flow $f$, there is a collection of flows $f_1, f_2, ...,f_k$, and a collection of $s\rightarrow t$ paths $p_1, p_2, ...,p_k$, such that:(a) $k\leq |E|$, (b) $|f|=|f_1|+...+|f_k|$ and (c) $f_i$ only sends flow over $p_i$**
+    + TODO（证明）
+  + TODO（补充算法性能）
+
+### 方法二
++ 在选择增强流时，选择最短的增强流
+  + 直接使用BFS即可
++ 下面评估算法性能
+  + **【Lemma1】：Choose the augmenting path with the smallest number of edges**
+    + 反证法TODO(补充证明)

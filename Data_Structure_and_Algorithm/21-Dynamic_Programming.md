@@ -248,6 +248,97 @@ for (i=n-1 downto 1)
 return ss[1, T]
 ```
 + 时间复杂度为$O(nT)$-----并不一定比$O(2^n)$要好
+
+## 最长公共子序列 LCS
++ 给定序列$X=<x_1, x_2, ...,x_m>$，另一个序列$Z=<z_1, z_2, ..., z_k>$满足下列条件时被称为X的子序列
+  + 存在一个严格递增的X的下标序列$<i_1, i_2, ..., i_k>$，且$x_{i_j}=z_j, j=1, 2, ..., k$.
+
+### 动态规划算法
++ 令序列$X$的第$i$前缀为$X_i=<x_1, x_2, ...,x_m>$，其余序列的第$i$前缀同样定义
++ 设计备忘机制
+  + 令$c[i, j]$表示$X_{i}, Y_j$的LCS长度
+  + $c[i, j]=\left\{
+    \begin{aligned}
+    &0 &i=0, j=0\\
+    &c[i-1, j-1]+1 &i,j>0, x_i=y_j\\
+    &\max(c[i, j-1], c[i-1, j]) &i,j>0,x_i\not =y_j
+    \end{aligned}
+    \right .$
++ 设计存放操作的数组b
+  + b的各元素$\in \{"leftup", "up", "left"\}$
++ 计算
+```python
+LCS-LENGTH(X, Y):
+m=X.length
+n=Y.length
+for i=1 to m
+    c[i, 0] = 0
+for j=0 to n
+    c[0, j] = 0
+for i=1 to m
+    for j=1 to n
+        if X[i]=Y[j]
+            c[i, j] = c[i-1, j-1] +1
+            b[i, j] = "leftup"
+        else if c[i, j-1] >= c[i-1, j]
+            c[i, j] = c[i, j-1]
+            b[i, j] = "left"
+        else
+            c[i, j] = c[i-1, j]
+            b[i, j] = "up"
+return c and b
+```
++ 空间复杂度优化
+  + 一种思路是去掉表b，并通过判断$c[i-1, j-1],c[i, j-1],c[i-1, j]$的值来重构最优解
+  + 另一种思路是，在计算表c时只是用当前行和前一行的数据。但是这样就无法用思路一中的方法重构最优解，因此这种思路下仍然需要保留表b
+
+## 最优二叉搜索树
++ 形式化定义如下
+  + 给定一个n个不同关键字的已排序序列$K=<k_1, k_2, .., k_n>$，对每个关键字$k_i$，都有一个概率$p_i$表示该关键字的搜索频率
+  + 由于需要搜索的值并不是离散的，因此定义n+1个伪关键字$d_0, d_1, ...,d_n$表示不在$K$中的值。其中$d_0$表示小于$k_1$的值，$d_i$表示介于$k_i$和$k_{i+1}$的值，$d_n$表示大于$k_n$的值。对于每个伪关键字，同样定义对应的搜索频率$q_0, q_1, ...,q_n$.
+  + 定义二叉搜索树的结构如下
+    + 每个内节点为给定的关键字
+    + 每个叶节点为给定的伪关键字
+    + 搜索到内节点终止时表示搜索成功，否则搜索到叶节点后表示搜索失败
+    + $\sum_{i=1}^np_i+\sum_{i=0}^nq_i=1$
+    + 对于给定的关键字和伪关键字，其中两种可能的二叉搜索树如图所示
+    ![](img/2019-12-17-03-41-44.png)
+  + 定义在搜索二叉树中进行一次搜索的期望代价为
+    + $E=\sum_{i=1}^n(\text{depth}_T(k_i)+1)\cdot p_i+\sum_{i=0}^n(\text{depth}_T(d_i)+1)\cdot q_i=1+\sum_{i=1}^n\text{depth}_T(k_i)\cdot p_i+\sum_{i=0}^n\text{depth}_T(d_i)\cdot q_i$
+  + 最优二叉搜索树即为搜索代价期望最小的二叉搜索树
+### 动态规划算法
++ 解的递归结构
+  + 为关键字$<k_i, ...,k_j>$建立二叉搜索树时，从所有的关键字中选择一个关键字$k_t$，然后将$k_t$作为根节点，$<k_i, ...,k_{t-1}>$和$<k_{t+1}, ...,t_j>$递归构造最优二叉搜索树
++ 建立备忘
+  + 使用$e[i, j]$代表包含关键字$<k_i, k_{i+1}, ...,k_j>$和相应伪关键字的二叉搜索树的期望代价
+  + 使用$w[i, j]$存储以下关键字/伪关键字的搜索代价之和$\sum_{l=i}^j p_l+\sum_{l=i-1}^jq_l$
++ 最优解的递归结构
+  + $e[i, j]=\left\{
+    \begin{aligned}
+    &q_{i-1}&j=i-1\\
+    &min_{i\leq r\leq j}\{e[i, r-1]+e[r+1, j]+w[i, j]\}&i\leq j
+    \end{aligned}
+    \right .$
++ 计算最优解（注意同时我们也使用了$w$来避免对$w[i, j]$的重复计算）
+  + 同时使用数组root重构最优解
+```python
+OPTIMAL-BST(p, q, n):
+let e[1...n+1, 0...n], w[1...n+1, 0...n], and root[1..n, 1...n] be new tables
+for i=1 to n+1
+    e[i, i-1] = q[i-1]
+    w[i, i-1] = q[i-1]
+for l=1 to n
+    for j=1 to n-l+1
+        j=i+l-1
+        e[i, j] = INF
+        w[i, j] = w[i, j-1] + p[j] + q[j]
+        for r=i to j
+            t = e[i, r-1]+e[r+1, j]+w[i, j]
+            if t<e[i, j]
+                e[i, j] = t
+                root[i, j] = r
+return e and root
+```
 ---
 ## DP中的空间优化
 + 在建立备忘机制后，表格中每个方格所依赖的子项往往只有相邻位置的方格。因此在填表时可以对空间开销进行优化。
@@ -265,15 +356,37 @@ for i=1 to m
     distLast = distCur
 return distCur[n]
 ```
-
 ### Edit Distance
 + 在备忘表中，每个格子只依赖左边、上边、左上三个方格，因此算完整个表所需空间可以被优化
-+ 
-+ TODO()
++ distLast表示上面一行，distCur表示该行
+```python
+EditDistDP(A[1…m],B[1…n]):
+for (j=0 to n)
+    distLast[j] = j
+for (i=1 to m)          # distLast[j] = dist[i-1,j]
+    distCur[0] = i        # distCur[j] = dist[i,j]
+    for (j=1 to n)
+        delDist = distLast[j] + 1
+        insDist = distCur[j-1] + 1
+        subDist = distLast[j-1] + Diff(A[i],B[j])
+        distCur[j] = Min(delDist,insDist,subDist)
+    distLast = distCur
+return distCur[n]
+```
 
 ### Floyd Warshell
-TODO()
-
++ 将原备忘录看成是由u, v, r构成的三维矩阵，事实上更新时只用到了r那个维度上相邻的两层二维表。
+```python
+FloydWarshallAPSP(G):
+for (every pair (u,v) in V*V)
+    if ((u,v) in E) then dist[u,v]=w(u,v)
+    else dist[u,v]=INF
+for (r=1 to n)
+    for (each node u)
+        for (each node v)
+            if (dist[u,v] > dist[u,xr] + dist[xr,v])
+                dist[u,v] = dist[u,xr] + dist[xr,v]
+```
 ---
 ## DP算法的正确性分析
 + 实际上只需要证明问题具有最优子结构性质即可

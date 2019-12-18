@@ -22,7 +22,7 @@
 + 直观上，每条残留网络中的边表示
   + 这条边还能承载的流的大小，或
   + 已推送的流中，在这条边上能被取消的流的大小。
-+ 在残留网络$G_f$找到从$s$到$t$的流$f'$，流$f'$可用于增强原网络中的流$f$  
++ 在残留网络$G_f$找到从$s$到$t$的一条**简单路径**，设在这条简单路径上能通过的流为$f'$，流$f'$可用于增强原网络中的流$f$  
   ![](img/2019-12-16-02-13-02.png)
 ### “增强”证明
 + 令$G$为流网络，$G_f$为残留网络，$f'$为$G_f$中的流
@@ -67,7 +67,7 @@ return f
 
 ---
 ## 最大流最小割定理
-+ 定义 **Cut**: A cut of flow network G=(V, E) is a bipartition (S, T) of V such that $x\in S$ and $t\in T$, $S\cup T=V$ and $ST=\emptyset$
++ 定义 **Cut**: A cut of flow network G=(V, E) is a bipartition (S, T) of V such that $s\in S$ and $t\in T$, $S\cup T=V$ and $ST=\emptyset$
 + 定义 **Capacity** of cut $(S, T)$：$c(S, T)=\sum_{u\in S}\sum_{v\in T}c(u, v)$
 + 定义 Given flow $f$, **net flow** across the cut $(S, T)$：$f(S, T)=\sum_{u\in S}\sum_{v\in T}f(u, v)-\sum_{u\in S}\sum_{v\in T}f(v, u)$
 + 定义 **Min-Cut**：a cut of minimum capacity among all cuts  
@@ -93,6 +93,9 @@ return f
 + 因此，$OPT(D')\geq OPT(D)$
 + 幸运的是，$OPT(D')=OPT(D)$
 + 因此$OPT(P)=OPT(D')$
+
+## 最大流最小割定理应用
++ 将最大流算法的应用到分割相关的物体上，比如求解连通图的最小连通度等
 
 
 ---
@@ -130,7 +133,7 @@ return f
 + 问题描述  
   ![](img/2019-12-16-20-50-20.png)
 
-+ 构建网络$G'=(V', E')
++ 构建网络$G'=(V', E')$
   + $V'=V\cup \{s, t\}$
   + $E'=\{(s, u):u\in L\}\cup \{(v, t):v\in R\}\cup \{(u, v):(u, v)\in E\}$
   + 为每条$E'$中的边分类大小为1的capacity

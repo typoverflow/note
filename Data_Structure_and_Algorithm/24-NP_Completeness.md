@@ -13,7 +13,6 @@
   + 输入x对于问题Q是“yes” instance**当且仅当**x对于P是“yes” instance
     ![](img/2019-12-24-14-31-11.png)
 + 如果Q能被多项式归约到P，则 Q$\leq_P$P，问题P至少和问题Q一样难
-
 ## * NP-hard定义
 + A decision problem $P$ is NP-hard if
   + for every problem $Q$ in NP, it is polynomially reducible to $P$

@@ -25,10 +25,10 @@
 + P is the set of decision problems each of which has a polynomial bounded algorithm
 + P is the set of decision problems each of which can be decided by some TM within polynimial time
 + 也就是P是多项式时间内可解的具体判定问题的集合
-+ Attension
++ Attention
   + 不在P中的问题一定是难以解决的
   + P中的问题具有闭包的性质
-  + **在判定一个问题是否属于复杂类P时，默认使用二进制编码。**事实上除非是一进制编码，其余进制编码都将得到相同的结果。
+  + **在判定一个问题是否属于复杂类P时，默认使用二进制编码**.事实上除非是一进制编码，其余进制编码都将得到相同的结果。
 
 ### 编码与运行时间的关系
 + 在求解运行时间时，我们希望它与具体的编码形式是无关的，然而事实上为了把具体问题转换为抽象问题我们又不得不这么做

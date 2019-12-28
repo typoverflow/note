@@ -259,11 +259,11 @@ return ss[1, T]
   + 令$c[i, j]$表示$X_{i}, Y_j$的LCS长度
   + $c[i, j]=\left\{
     \begin{aligned}
-    &0 &i=0, j=0\\
-    &c[i-1, j-1]+1 &i,j>0, x_i=y_j\\
-    &\max(c[i, j-1], c[i-1, j]) &i,j>0,x_i\not =y_j
+        &0 &i=0, j=0\\
+        &c[i-1, j-1]+1 &i,j>0, x_i=y_j\\
+        &\max(c[i, j-1], c[i-1, j]) &i,j>0,x_i\not =y_j\\
     \end{aligned}
-    \right .$
+    \right.$
 + 设计存放操作的数组b
   + b的各元素$\in \{"leftup", "up", "left"\}$
 + 计算
@@ -315,10 +315,10 @@ return c and b
 + 最优解的递归结构
   + $e[i, j]=\left\{
     \begin{aligned}
-    &q_{i-1}&j=i-1\\
-    &min_{i\leq r\leq j}\{e[i, r-1]+e[r+1, j]+w[i, j]\}&i\leq j
+        &q_{i-1}&j=i-1\\
+        &min_{i\leq r\leq j}\{e[i, r-1]+e[r+1, j]+w[i, j]\}&i\leq j\\
     \end{aligned}
-    \right .$
+    \right.$
 + 计算最优解（注意同时我们也使用了$w$来避免对$w[i, j]$的重复计算）
   + 同时使用数组root重构最优解
 ```python

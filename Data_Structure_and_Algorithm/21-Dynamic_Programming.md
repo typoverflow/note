@@ -84,9 +84,10 @@ CutRodIter(prices, n):
 r[0] = 0
 for (i=1 to n)
     q = -INF
-        for j=1 to i
-            q = Max(1, prices[j]+r[i-j])
-        r[i] = qreturn r[n]
+    for j=1 to i
+        q = Max(q, prices[j]+r[i-j])
+    r[i] = q
+return r[n]
 ```
 + 时间复杂度仍然为$O(n^2)$
 + 然而上述算法仅能得出最大利润，却无法给出切割方案。因此可进一步改进
@@ -118,7 +119,7 @@ while n>0
 #### 动态规划算法
 + 找到解的递归结构
   + 最后一步可被看作$(A_1A_2...A_k)\cdot(A_{k+1}A_{k+2}...A_n)$
-  + 因此中间的任何步骤都可被看作$(A_iA_{i+1}...A_k)\cdot(A_{k+1}A_{k+2}...A_j)$
+  + 中间的任何步骤都可被看作$(A_iA_{i+1}...A_k)\cdot(A_{k+1}A_{k+2}...A_j)$
 + 建立备忘机制
   + 令$m[i, j]$表示计算$A_i...A_j$的最小代价
 + 找到最优解的递归结构
@@ -135,7 +136,7 @@ while n>0
 MatrixChainDP(A1, A2, ..., An):
 for i=1 to n
     m[i, j] = 0
-for l=2 to n
+for l=2 to n               # possibly has problems here! remaining to be fixed.
     for i=1 to n-l+1
         j = i+l-1
         m[i, j] = INF
@@ -341,21 +342,7 @@ return e and root
 ```
 ---
 ## DP中的空间优化
-+ 在建立备忘机制后，表格中每个方格所依赖的子项往往只有相邻位置的方格。因此在填表时可以对空间开销进行优化。
-```python
-EditDistDP(A[1...m], B[1...n]):
-for j=0 to n
-    distLast[j] = j         # distLast[j] = dist[i-1, j]
-for i=1 to m
-    disCur[0] = i           # distCur[j] = dist[i, j]
-    for (j=1 to n)
-        delDist = distLast[j]+1
-        insDist = distCur[j-1]+1
-        subDist = distLast[j-1]+Diff(A[i], B[j])
-        distCur[j] = Min(delDist, insDist, subDist)
-    distLast = distCur
-return distCur[n]
-```
+
 ### Edit Distance
 + 在备忘表中，每个格子只依赖左边、上边、左上三个方格，因此算完整个表所需空间可以被优化
 + distLast表示上面一行，distCur表示该行
@@ -390,7 +377,7 @@ for (r=1 to n)
 ---
 ## DP算法的正确性分析
 + 实际上只需要证明问题具有最优子结构性质即可
-+ 特殊地，如果使用迭代解决动态规划问题，需要证明当前问题以来的子问题已被解决
++ 特殊地，如果使用迭代解决动态规划问题，需要证明当前问题依赖的子问题已被解决
 
 ## DP算法的复杂度分析
 + 时间复杂度

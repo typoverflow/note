@@ -1,7 +1,7 @@
 # All-Pairs Shortest Paths Problem
 + 显然，ASAP问题可直接用SSSP方法解决  
   ![](img/2019-12-02-02-12-50.png)
-## APSP from multiple SSSP
+## ASAP from multiple SSSP
 + 从上图可见，Dijkstra算法在ASAP中比Bellman-Ford要快得多。因此可以考虑将图中的边的权重转化为正值，然后使用Dijkstra算法解决ASAP问题
 
 

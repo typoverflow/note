@@ -25,8 +25,18 @@ CREATE TABLE <table_name> (
   + NOT NULL:表示该字段的数据必须为非NULL
   + AUTO_INCREMENT:表示该字段为递增属性，数值会自动加1
 + 例子：
-  + ![](img/2019-11-12-19-04-17.png)
-
+```sql
+CREATE TABLE orders (
+  ordno INTERGER NOT NULL, 
+  month CHAR(3), 
+  cid CHAR(4), 
+  aid CHAR(3), 
+  pid CHAR(3), 
+  qty INTERGER, 
+  dollars DOUBLE PRECISION, 
+  PRIMARY KEY(ordno)
+);
+```
 
 ---
 ## 删除数据表
@@ -39,7 +49,7 @@ DROP TABLE <table_name>;
 ## 插入数据
 ```sql
 INSERT INTO <table_name> (<col_name1>, <col_name2>,..., <col_namen>)
-VALUES (...);
+VALUES (...) | subquery;
 ```
 ```sql
 INSERT INTO <table_name>
@@ -55,6 +65,12 @@ INSERT INTO <table_name>
 UPDATE <table_name>
 SET ...
 WHERE <Condition>;
+```
++ 例如
+```sql
+UPDATE agents
+SET percent = 1.1*percent
+WHERE city = 'New York'
 ```
 
 ---
@@ -95,12 +111,19 @@ FROM table_name_list [AS alias_name]    #FROM子句
   + 范围子句，定义本次查询可以访问的关系表
   + FROM和SELECT子句中的东西不能发生重名现象
 + AS子句
-  + ```sql
-    table_name | (subquery) [AS corr_name[(colname, ...)]]
-    ```
-  + 用于定义table_ref，不仅可以重命名表，也可以创建一个指向子查询的ref，同时可以重命名表内的属性名。
-  + 一方面，当表名、属性名发生冲突时，使用AS子句解决冲突
-  + 另一方面，适当地使用AS子句也可简化expressions和表名
+  + 在FROM子句中，为表定义别名
+    + ```sql
+      table_name | (subquery) AS corr_name[(colname, ...)]
+      ```
+    + 用于定义table_ref，不仅可以重命名表，也可以创建一个指向子查询的ref，同时可以重命名表内的属性名。
+  + 或者，在SELECT子句中，为列定义别名
+    + ```sql
+      SELECT col_name | expr AS corr_name
+      ```
+  + 一方面，当表名、属性名发生冲突时，使用AS子句解决冲突  
+  ![](img/2020-01-02-08-35-00.png)
+  + 另一方面，适当地使用AS子句也可简化expressions和表名  
+  ![](img/2020-01-02-08-34-39.png)
   + AS子句也可省略AS，用空格连接原名和别名
 
 ### SubQuery
@@ -108,18 +131,20 @@ FROM table_name_list [AS alias_name]    #FROM子句
 + 子查询的形式可以是一个SELECT的结果，也可以是一个集合。
 #### SQL中与子查询有关的谓词
 + IN
-  + ```sql
-    expr IN (subquery)
-    ```
-
-  + ```sql
-    expr NOT IN (subquery)
-    ```
   + 一个标量值是否属于一个向量值的比较
+    + 一种用法是一个属性是否属于某个子查询然后投影在该属性上的取值集合，实际上条件判断
+    + 一种是一个属性的取值是否在一个认为给定的取值范围内。
+  + ```sql
+    expr|col_name IN (subquery)|(domain)
+    ```
+  + ```sql
+    expr|col_name NOT IN (subquery)|(domain)
+    ```
   + 可用于优化查询，例如下图  
   ![](img/2019-11-12-20-18-57.png)
   ![](img/2019-11-12-20-19-14.png)
 + 量词
+  + 修饰一个集合
   + ```sql
     expr = | <> | < | <= | > | >= SOME (subquery)
     expr = | <> | < | <= | > | >= ANY (subquery)
@@ -149,7 +174,7 @@ FROM table_name_list [AS alias_name]    #FROM子句
   + ```sql
     SELECT col_name
     FROM table_name
-    WHERE col_name LIKE '<pattern>';
+    WHERE col_name LIKE '<pattern>' [ESCAPE '<escape_char>'] ;
     ```
   + 类似正则表达式的匹配机制
   + 元字符
@@ -260,10 +285,15 @@ WHERE  cond2;
       FROM customers c2
     );
     ```
+  + 三种使用方式
+    + SELECT 统计函数
+    + SELECT 分组属性+统计函数  ...  group by 分组属性
+    + SELECT 分组属性+统计函数  ...  group by 分组属性 ...  having 组选择条件
+  + **统计函数的返回结果是单条元组构成的集合！因此使用时常常用作量词的输入**
 
 #### GROUP BY子句
 ```sql
-SELECT <col_name>, ..., <statistic_quantity> | <col_name_n>
+SELECT <col_name>, ..., <statistic_quantity>
 FROM <table_name>
 GROUP BY <col_name>
 HAVING <other_col_name> | <statistic_quantity> satisfy Condition
@@ -277,6 +307,7 @@ for each distinct value V of pid in orders:
 end for
 ```
 + 带GROUP BY子句的分组统计查询执行过程
+  + 首先要求SELECT后只能有分组属性或者统计函数
   + 先执行WHERE进行条件查询，得到满足WHERE条件的结果元组结合S
   + 根据各个元组在分组属性上的取值，将集合S划分为若干个子集：S1, S2, ..., Sk
   + 对每一个子集Si

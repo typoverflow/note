@@ -33,10 +33,10 @@
 + 将原图按照各强连通分量收缩为一个点，并把原本的边合并起来，得到的图称为component graph $G^C$
 + **component graph是一个有向无环图(DAG)**，若不然，环中的各连通分量将构成更大的SCC。
 + 如果我们能从component graph当中的sink SCC开始进行遍历，那么遍历过的点都将是sink SCC中的点（根据white path theorem）
-+ 为了寻找sink SCC，将G中的所有有向边进行反向，并画出它的component graph $(G^R)^C$，将问题转化为在$(G^R)^C$中寻找source节点
++ 为了寻找sink SCC，将G中的所有有向边进行反向，并画出它的component graph $(G^R)^C$，将问题转化为在$G^R$中寻找在source SCC中的节点
 + **【Lemma3】：for any edge $(u, v)\in E(G^R)$, if $u\in C_i,v\in C_j$, then $\max_{u\in C_i} {u.f}>max_{v\in C_j}{v.f}$**  
   ![](img/2019-11-19-15-37-37.png)
-+ 对$G^R$中的节点进行DFS，得到的结束时间最大的节点一定是$G^R$中的source，也就是$G$中的sink，然后在$G^C$中对该节点进行DFS，得到的为$(G^C)$中的sink SCC
++ 对$G^R$中的节点进行DFS，得到的结束时间最大的节点一定是$G^R$中的在source SCC中的节点，也就是$G$中的在sink GCC中的节点，然后在$G$中对该节点进行DFS，得到的为$(G^C)$中的sink SCC
 + 去掉该sink SCC后，继续寻找sink SCC即可。由于之前已经对$G^R$进行过遍历，由引理只需要继续找结束时间最大的节点重复上面一个过程即可。
 + 总的算法过程
   + Compute $G^R$

@@ -37,11 +37,11 @@ while (!Q.empty())
     u = Q.ExtractMin()
     for (each edge (u, v) in E)
         if (v.dist > u.dist+w(u, v))
-        v.dist = u.dist + w(u, v)
-        v.parent = u
-        Q.DecreaseKey(u)
+            v.dist = u.dist + w(u, v)
+            v.parent = u
+            Q.DecreaseKey(u)
 ```
-+ 不难分析，使用小顶堆实现的Dijkstra算法的总的时间复杂度为$O(n+m)\log n$
++ 不难分析，使用小顶堆实现的Dijkstra算法的总的时间复杂度为$O((n+m)\log n)$
 + Dijlstra算法也是贪心算法
 
 #### Dijkstra算法的另一种理解
@@ -59,12 +59,10 @@ while (!Q.empty())
   + **【收敛性质】**：如果$p=\{v_0, v_1, ..., v_k\}$是从源节点$s=v_0$到节点$v_k$的最短路径，且若$v_{k-1}.d$已达到最小值$\sigma(s, v_{k-1})$，则在执行$Relax(v_{k-1}, v_k)$后节点$v_k.d$也取到最小值。
   + **【路径松弛性质】**：在松弛操作序列$(v_0, v_1), (v_1, v_2), ...,(v_{k-1}, v_k)$后，节点$v_k.d$将取到最小值。（可由收敛性质推得）
 + 由上界性质和路径松弛性质可推到一条重要性质：
-  + **【路径松弛性质】**：在松弛操作序列$(v_0, v_1), (v_1, v_2), ...,(v_{k-1}, v_k)$中间任意插入其他松弛操作，仍将使$v_k.d$取到最小值。
+  + **【路径松弛性质推论】**：在松弛操作序列$(v_0, v_1), (v_1, v_2), ...,(v_{k-1}, v_k)$中间任意插入其他松弛操作，仍将使$v_k.d$取到最小值。
 + 以上性质导出，Update(u, v)是正确并且有帮助性的
   + **【safe】：无论Update的操作顺序是怎样的，v.dist要么是被过高估计，要么是正确的**
   + **【helpful】：With correct sequence of Update, we get correct v.dist**
-+ 观察到两点：  
-  ![](img/2019-11-28-02-31-03.png)
 
 #### Bellman-Ford Algorithm
 + Update all edges
@@ -85,8 +83,9 @@ for each edge (u, v) in E                     # 判断是否存在负环
         return "Negative Cycle!"
 ```
 ![](img/2019-11-28-02-54-47.png)
-+ 在预知最短路径深度d的情况下，可以只进行d次repeat。或者在某次更新后各节点的dist值不再发生变化时，即可终止算法。
++ 在预知最短路径深度d的情况下，可以只进行d次repeat。或者在某次更新后各节点的dist值不再发生变化时，即可终止算法。（由路径松弛性质可知）
 + **Bellman-Ford还可以判断当前图中是否有负环**。循环进行了n-1次后，如果对于某个节点仍然有v.dist>u.dist+w(u, v)，那么图中一定存在负环。
++ **Bellman-Ford的异步松弛和同步松弛**：同步松弛指的是每次for迭代时均使用上一次迭代结束时个节点的dist属性来进行松弛操作，而异步松弛则是尽可能使用当前迭代中已松弛的新值。同步松弛在执行第n次迭代后能够检测负环，而异步松弛在执行第n次后不仅能检测出负环，还能检测出从源节点出发距离为负无穷的所有点。
 
 ### SSSP in DAG with negative weights
 + Bellman-Ford算法运行时间过长的原因在于大量的松弛操作是无效的。真正有效的松弛操作应沿着边的延伸顺序进行。

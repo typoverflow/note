@@ -44,3 +44,5 @@ See [HERE](assets/KR&P-protege_tutorial.pdf)
 + **Role 2: A KR is a Set of Ontological Commitments**
   + Ontological Commitments are a set of notions we choose to comment on the world.
   + Our choice of KR (as discussed above, KR reflects part of the object attributes so we have multiple choice of KR), is in effect a strong pair of glasses that determine what we can see, bringing some part of the world into sharp focus, at the expense of blurring other parts.
+
+...

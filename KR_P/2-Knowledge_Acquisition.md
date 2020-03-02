@@ -36,14 +36,14 @@
 + 下面的部分我们讨论其中一种语言$\mathcal{EL}$.
 ---
 ## $\mathcal{EL}$
-### syntax
-+ language for $\mathcal{EL}$ concepts
+### Syntax
++ definitions
   + **concept names** $A_0, A_1...$. (Person, Female...)
-  + role names $r_0, r_1...$ (hasChild, loves)
+  + **role names** $r_0, r_1...$ (hasChild, loves) can be seen as *binary-relations*
   + $\top$
   + concept constructor $\sqcap$
   + concept constructor $\exists$
-+ $\mathcal{EL}$ **concepts** are defined inductively
++ $\mathcal{EL}$ **concepts**: represents sets of elements and can be view as *unary-predicates* 
   + all concept names are $\mathcal{EL}$ concepts
   + $\top$ is a $\mathcal{EL}$ concept
   + if $C$ and $D$ are $\mathcal{EL}$ cncpepts and $r$ is a role name, then $(C\sqcap D), \exists r.C$ are $\mathcal{EL}$ concepts
@@ -51,7 +51,10 @@
 ![](img/2020-02-25-15-28-01.png)
 Attension： $\exists r.C$中的$C$是修饰$r$的
 
-### Concept Definitions in $\mathcal{EL}$
+### Concept Definition Formats in $\mathcal{EL}$
 Let $A$ be a **concept name** and $C$ a $\mathcal{EL}$ **concept**
 + $A\equiv C$ is a $\mathcal{EL}$ concept definition. $C$ describes necessary and sufficient conditions for being $A$.
 + $A\sqsubseteq C$ is a primitive $\mathcal{EL}$ concept definition. $C$ describes necessary conditions for being A. 
++ newly-defined concept names can be used to define other concepts, inductively.
+
+### $\mathcal{EL}$ Terminology

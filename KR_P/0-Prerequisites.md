@@ -48,8 +48,8 @@ for formula $A$ and $B$
 + Introduce names recursively for every non-literal subformula in the original formula
 + Increasing the size by an additional **constant** factor
 + New formula is only *equiv-satisfiable* as the original formula, while **the model changes**!
-+ 如下图，逐步裂开
-![](img/2020-02-23-22-09-57.png)
++ 如下图，逐步裂开  
+![](img/2020-02-23-22-09-57.png)  
 ![](img/2020-02-23-22-17-18.png)
 
 
@@ -58,13 +58,13 @@ for formula $A$ and $B$
 + 复杂度不同，一个是指数级，一个是线性的
 
 #### Propositional Resolution
-+ Propositional Resolution inference system $\mathbb{BR}$, consists of the following inference rules
++ Propositional Resolution inference system $\mathbb{BR}$, consists of the following inference rules  
 ![](img/2020-02-23-22-30-14.png)
 + 想法
   + 证明原公式集不可满足
   + 在CNF情况下，如果需要找到一个model，则必须clauses同时为True
   + 通过上述两公理，不断进行消解直到最后，若得到False则推出矛盾
-+ 例子如下，注意，根据老师的说法，这里的横线代表的是语义上的推导而非语法上的公理
++ 例子如下，注意，根据老师的说法，这里的横线代表的是语义上的推导而非语法上的公理  
 ![](img/2020-02-23-22-36-06.png)
 
 #### Soundness
@@ -81,7 +81,7 @@ $$S\models\perp \ \  implies \ \ S\vdash_{\mathbb{I}}\perp$$
 #### Simplication rules
 + 化简律在饱和过程中将不影响正确性和完备性的子句去除
 + **【Tautology Elimination】(TE)**: $S\rightarrow S-{T}$
-+ **【Subsumption Elimination】(SE)**: $S\rightarrow S-{D}$ where there is $C\in S$ such that $C\subset D$ (消去大的)
++ **【Subsumption Elimination】(SE)**: $S\rightarrow S-{D}$ where there is $C\in S$ such that $C\subset D$ (消去大的)  
 ![](img/2020-02-23-23-02-58.png)
 
 ### DPLL
@@ -96,7 +96,7 @@ $$S\models\perp \ \  implies \ \ S\vdash_{\mathbb{I}}\perp$$
 + 首先要有unit
 + 实际上是对于已知的式子，将相反的式子直接划去
 + 如果不存在unit或需要的unit不够，则使用下面的Decide和Backtrace
-+ Example
++ Example  
 ![](img/2020-02-23-23-12-21.png)
 #### Horn Clauses
 + A clause is called Horn if it contains at most one positive literal
@@ -114,11 +114,11 @@ $$S\models\perp \ \  implies \ \ S\vdash_{\mathbb{I}}\perp$$
 + DPLL Backjump的思想就是根据回溯前得到的无法被满足的式子，分析其中literal之间的相互决定关系，然后回溯到第一个产生矛盾的变量处，这样可以一次跨越多个decide literal层级
 + 在这里给出一个形而上的例子
 
-首先，只有我们随机选择进行决定的literal才是decide literal，而根据decide literal的取值为了满足某公式为真而被决定的赋值并不是decide literal，它们只是与decide literal有依赖关系。因此在书写决定顺序时我们可以顺便记录下这种依赖关系(方括号内内容)
+首先，只有我们随机选择进行决定的literal才是decide literal，而根据decide literal的取值为了满足某公式为真而被决定的赋值并不是decide literal，它们只是与decide literal有依赖关系。因此在书写决定顺序时我们可以顺便记录下这种依赖关系(方括号内内容)  
 ![](img/2020-03-01-11-16-33.png)
 按照如上决定顺序进行决定，则最终会发现$\neg t\lor\neg v$推导出$\bot$
 
-分析可知，$\neg t$和$\neg v$中起到作用的decide literal有$p$和$t$
+分析可知，$\neg t$和$\neg v$中起到作用的decide literal有$p$和$t$  
 ![](img/2020-03-01-11-22-42.png)
 由于decideliteral可以被视作在原公式集$S$上添加了新的原子公式，可以看作
 $S\land p\land t\models \bot$
@@ -145,7 +145,7 @@ $S\land p\models \neg t$
 
 ### Alphabet
 + logical symbols (*domain independent*)
-  + logical connectives and quntifiers
+  + logical connectives and quntifiers  
     ![](img/2020-02-28-22-23-55.png)
   + variables
     + A countable infinite set $\mathcal{X}$ of symbols $x_1, x_2,...$
@@ -186,7 +186,7 @@ $S\land p\models \neg t$
 + 如果某公式中含有变量的自由出现，则为**open formulae**
 + 如果$x_1,x_2,...,x_n$是$F$的自由变量，则称$\forall x_1\forall x_2,...,\forall x_nF$为$F$的**closure formulae**
 
-### Substitution
+### Substitution  
 ![](img/2020-02-29-22-18-57.png)
 + 如果$x$不在替换$\sigma$的作用变量域内，则不发生替换
 
@@ -224,12 +224,12 @@ that assigns the variables to elements of the domain
 #### Prenex Normal Form
 + PNF 前缀范式
 + 形式：$Q_1x_1...Q_nx_nF$，$F$中不含量词
-+ 转化为PNF范式的规则
-![](img/2020-03-01-22-09-36.png)
-![](img/2020-03-01-22-17-27.png)
-![](img/2020-03-01-22-20-30.png)
++ 转化为PNF范式的规则  
+![](img/2020-03-01-22-09-36.png)  
+![](img/2020-03-01-22-17-27.png)  
+![](img/2020-03-01-22-20-30.png)  
 + 通过rename和提取量词过程，可将任意公式转换为PNF范式
-+ 一般的转换步骤如下
++ 一般的转换步骤如下  
 ![](img/2020-03-01-22-25-32.png)
 
 #### Skolem Normal Form

@@ -1,6 +1,8 @@
 # :yum: Note
 This repo contains notes of courses for undergraduates in School of AI, Nanjing University.  
 
+艰难困苦，玉汝于成 (Adversity often leads to prosperity). This repo is maintained by [Derek-Gcx](http://github.com/Derek-Gcx) with :heart:, and hopefully this can do some help to you!
+
 ## :confused: Content
 + **clrs** 
   + solution to 《*Introduction to Algorithms*》

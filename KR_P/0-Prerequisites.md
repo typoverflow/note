@@ -249,3 +249,40 @@ that assigns the variables to elements of the domain
 + $F$和$H$不等价，只有$H\models F$. (model有变)
 + 但是，$G$可满足当且仅当$H$可满足 (考虑Axiom of Choice)
 + 因而$C$ **可满足 iff $F$ 可满足**
+
+---
+
+## Herbrand Interpretation
++ Herbrand Interpretation是一种定义简单、可供真值分析的解释
++ key idea of **Herbrand theorem**: for establishing the truth of clauses it suffices to consider only Herbrand interpretations
++ 也就是说，Herbrand Interpretation是一种抽象化的、精心构造的论域而非一种向真实世界论域的具体映射。如果在这个论域上某公式可被满足，那么这个式子本身就是可满足的。因此，Herbrand定理的价值在于给出了一种universal technique of satisfiability analysis
+
+### Herbrand Universe
++ Herbrand semantics allows us to fix a special domain s.t. if F is unsatisfiable, then every truth assignment over this special domain is false
++ **Herbranch Universe ($T_\Sigma$)**: the set of all ground terms over the signature $\Sigma=(\mathcal{F}, \mathcal{P})$  
+  ![](img/2020-03-06-22-22-59.png)
+  + 如果没有常数，为了满足最后一条要求，随便引进一个符号作为常数
+
+### Herbrand Interpretations
++ Herbrand Interpretation, denoted $I$, is a set of ground atoms over $\Sigma$
++ Truth in $I$ of ground formulae is defined inductively
+  + $I\not\models \bot$
+  + $I\models \top$
+  + $I\models A$ iff $A$ is a ground atom and $A\in I$
+  + $I\models \neg F$ iff $I\not\models F$
+  + $I\models F\land G$
+  + TODO  
+
+
+![](img/2020-03-06-22-31-08.png)
+
+### Relation to standard interpretations
++ 在Herbrand解释中，将常量、函数解释为它自身，将谓词也解释为它自身。变量的赋值是限定在Herbrand Universe中的
+
+### The Set of All Ground Instances $G_{\Sigma}(N)$
+![](img/2020-03-06-22-47-51.png)
+
+### Existence of Herbrand Models
+![](img/2020-03-06-22-49-25.png)
+![](img/2020-03-06-22-51-17.png)
+

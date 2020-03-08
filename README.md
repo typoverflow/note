@@ -18,8 +18,6 @@ This repo contains notes of courses for undergraduates in School of AI, Nanjing 
   + course notes
 + **Intelligent System**
   + course notes
-+ **Java** 
-  + *an overview of Java grammar*
 + **KR_P**: *Knowledge Representation and processing*
   + course notes 
 + **linux cmd** 
@@ -43,7 +41,7 @@ This repo contains notes of courses for undergraduates in School of AI, Nanjing 
 + Latex grammar is not supported in GitHub markdown preview, so you are strongly recommended to
   + download this repo and use VSCode to check these files, or
   + use Chrome and install the extension [MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima/related).(Still, this can only solve part of the problem...)
-+ Almost all of the course notes deploy both Chinese and English, due to
++ Almost all of the course notes deploy both Chinese and English, because
   + orginal materials are written in English, 
   + some concepts can be described more precisely in English, 
   + I am a Chinese student.

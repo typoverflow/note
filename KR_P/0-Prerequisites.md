@@ -286,3 +286,29 @@ that assigns the variables to elements of the domain
 ![](img/2020-03-06-22-49-25.png)
 ![](img/2020-03-06-22-51-17.png)
 
+---
+## Basic General Resolution
+![](img/2020-03-08-22-04-50.png)
++ $\sigma$是对变量的某种 most general unifier 赋值
++ 对于resolution rule
+  + 两个clause之间的变量集合必须不相交，如果有同名称的变量，必须先进行重命名
+
+![](img/2020-03-08-22-13-17.png)
+
+### Ordered resolution with selection
++ 是Basic General Resolution的扩展，解决了Res顺序不一定的问题，降低搜索空间规模
+#### Selection Function
+![](img/2020-03-08-22-24-22.png)
+
+#### New Definition of Res Rules
+![](img/2020-03-08-22-27-32.png)
++ 也就是说，首先要考虑Selection Function选中的负变量，然后才轮到Ordering最大的变量
+
+TODO 补一个factor
+![](img/2020-03-08-22-31-22.png)
+
+---
+## Redundancy
+![](img/2020-03-08-22-57-21.png)
++ 即Clause之间存在推出关系，去除redundancy可以削减搜索空间
+![](img/2020-03-08-23-01-41.png)

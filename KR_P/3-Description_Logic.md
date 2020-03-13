@@ -1,6 +1,6 @@
 # The Descriptional Logics
 + Description Logics是一阶逻辑中可被判定的那些子集。Description Logics的表达能力稍弱于一阶逻辑。
-+ 下面的部分我们讨论其中一种语言$\mathcal{EL}$.
++ 下面的部分我们讨论其中两种种语言$\mathcal{EL}$.
 ---
 # $\mathcal{EL}$
 ## Syntax

@@ -66,14 +66,63 @@ function REFLEX_AGENT(percept) returns an action
 ![](img/2020-02-21-16-10-08.png)
 + 比如grid world，基于知识推测出当前世界的状态，然后根据简单的条件行为规则（不如不要走有怪兽的格子）来选择自己的行动
 
+```python
+function MODEL-BASED-REFLEX-AGENT(percept) return an action
+  persistent: state, "the agent's current conception of the world"
+              model, "how the next state depends on current state and action"
+              rules, "a set of condition-action rules"
+              action, "the most recent action"
+  state <- Update-State(state, action, percept, model)
+  rule <- Rule-Match(state, rules)
+  action <- rule.action
+  return action
+```
+
 ### 基于目标的Agent
 ![](img/2020-02-21-16-28-57.png)
 + 记录想要到达的目标的集合，向达成目标的方向执行动作（贪心）
+
+```python
+function TARGET-BESED-AGENT(percept) return an action
+    persistent: {
+        state, "the agent's current conception of the world state"
+        model, "a description of how the next state depends on the current state and action"
+        targets, "target states we hope to achieve"
+        last_action, "the most recent action"
+        action_list, "the list of actions that an agent can take"
+    }
+
+    state <- Update-Sate(state, last_action, percept, model)
+    for every action in action_list:
+        state' <- Update-State(state, action, model)
+        if state' in targets:
+            return action
+    if no action is returned, then return a random action
+```
 
 ### 基于效用的Agent
 ![](img/2020-02-21-16-29-59.png)
 + 使用效用函数替代目标，可以实现折中和迂回
 + 执行动作时的原则是使效用最大化
+
+```python
+function UTILITY-BASED-AGENT(percept) return an action
+    persistent: {
+        state, "the agent's current conception of the world state"
+        model, "a description of how the next state depends on the current state and action"
+        utility_fn, "the utility function"
+        last_action, "the most recent action"
+        action_list, "the list of actions that an agent can take"
+    }
+
+    state-util-pairs <- empty dict
+    state <- Update-State(state, last_action, percept, model)
+    for every action in action_list:
+        state' <- Update-State(state, action, model)
+        util = utility_fn(state')
+        state-util-pairs.add(key=action, value=util)
+    return argmax(state-util-pairs.values())
+```
 
 ## 学习Agent
 + 架构

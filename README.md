@@ -37,7 +37,7 @@ This repo contains notes of courses for undergraduates in School of AI, Nanjing 
   + [Personal website of a damnly cool guy](https://s974534426.github.io/)
 
 
-## :exclamation: Attension
+## :exclamation: Attention
 + Latex grammar is not supported in GitHub markdown preview, so you are strongly recommended to
   + download this repo and use VSCode to check these files, or
   + use Chrome and install the extension [MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima/related).(Still, this can only solve part of the problem...)

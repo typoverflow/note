@@ -10,7 +10,9 @@
   + 描述了数据的语义结构
   + RDF与OWL有一定区别，RDF只支持三元组的形式，主语，谓语，宾语，不支持TBOX类型的知识，即概念与概念之间的关系
 + **OWL：**
-  + 支持TBOX和ABOX
+  + 用于描述、组建我们创造出来的本体
+  + **OWL是基于描述语言的，但不等同于描述语言**
+  + OWL实际上可以被看做是RDF在TBOX上的扩展
   + 对应到数据库，填充的数据实际上是ABOX，而表格的Schema是TBOX，反映了Attributes之间的联系
 + **SPARQL**
   + 提供了一种查询语言
@@ -18,11 +20,11 @@
 
 ## Ontology
 + 世界某一个方面的建模
-  + Introduces vocabulary relevant to domain
-  + Specifies meaning (semantics) of terms
-  + Formalised using suitable logic e.g. FOL
+  + 首先会定义论域上所有涉及到的词汇
+  + 指明属于的含义和定义
+  + 使用类似一阶逻辑的逻辑语言对上述属于进行描述
 
-## Web Ontology Language OWL
+## Web Ontology Language： OWL
 + 首先，能够用于书写Ontology的语言不只是OWL，但是OWL是最完备的一个
 + OWL有一定的工具和基础设施
   + APIs
@@ -31,14 +33,15 @@
 + OWL基于Description Logics （$\text{SHOIN SROIQ}$）
 
 ## Description Logics
-+ FOL的属性子集
++ OWL语言是要基于DL的
++ DL是FOL的属性子集
 + 拥有一些良好的性质
   + 可被判定
   + 复杂度低
 + 没有变量，只有concepts和连接符  
 ![](img/2020-03-10-14-39-34.png)
 
-## Class/Concepts Constructors
+## Class/Concepts Constructors Diffs in OWL and DL
 ![](img/2020-03-10-14-42-14.png)
 + 这也说明DL语法可以被翻译成FOL语法
 + Constructor是DL Syntax基础上的一个包装，wrapper，**不同的DL是对OWL的实例化和符号化**

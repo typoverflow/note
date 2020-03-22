@@ -1,13 +1,13 @@
 # The Descriptional Logics
 + Description Logics是一阶逻辑中可被判定的那些子集。Description Logics的表达能力稍弱于一阶逻辑。
-+ 下面的部分我们讨论其中两种种语言$\mathcal{EL}$.
++ 下面的部分我们讨论其中两种种语言$\mathcal{EL}$和$\mathcal{ALC}$.
 ---
 # $\mathcal{EL}$
 ## Syntax
 + definitions
   + **concept names** $A_0, A_1...$. (Person, Female...)
   + **role names** $r_0, r_1...$ (hasChild, loves) can be seen as *binary-relations*
-  + $\top$
+  + $\top$, often called "thing"
   + concept constructor $\sqcap$
   + concept constructor $\exists$
 + $\mathcal{EL}$ **concepts**: represents sets of elements and can be view as *unary-predicates* 
@@ -24,13 +24,47 @@ Let $A$ be a **concept name** and $C$ a $\mathcal{EL}$ **concept**
 + $A\sqsubseteq C$ is a primitive $\mathcal{EL}$ concept definition. $C$ describes necessary conditions for being A. 
 + newly-defined concept names can be used to define other concepts, inductively.
 
-## $\mathcal{EL}$ Terminology
+### $\mathcal{EL}$ Terminology
 + $\mathcal{EL}$ yerminology is a finite set of definitions of the form $A\equiv C$ and $A\sqsubseteq C$, such that no concept name occurs more than once on the left
++ So in terminoogy a concept cannot have two distinct definitions
 
+### $\mathcal{EL}$ concept inclusion
++ $C\sqsubseteq D$ is called a $\mathcal{EL}$ concept inclusion, or C is subsumed by D, or D subsumes C
+
+### $\mathcal{EL}$ TBox
++ A $\mathcal{EL}$ TBOX is a finite set $T$ of $\mathcal{EL}$ concepts inclusions $C\sqsubseteq D$
++ Note: acyclic terminology $\subseteq$ terminology $\subseteq$ TBox
+
+## Semantics
+### Interpretation
++ An **interpretation** is a structure $\mathcal{I}=(\Delta^\mathcal{I}, \cdot^\mathcal{I})$
+  + $\Delta^\mathcal{I}$ is the domain
+  + $\cdot^\mathcal{I}$ is a map function
+    + **concept name** A is mapped to a subset $A^\mathcal{I}$ of $\Delta^\mathcal{I}$
+    + role name $r$ is mapped to a binary relation $r^\mathcal{I}$ over $\Delta^\mathcal{I}$
++ other inductive definitions  
+  ![](img/2020-03-21-22-14-29.png)
+
+### Truth value of a concept inclusion
++ suppose 
+  + $\mathcal{I}$ an interpretation
+  + $C\sqsubseteq D$ an inclusion
+  + $\mathcal{T}$ a TBox
++ $\mathcal{I}\models C\sqsubseteq D$ iff $C^\mathcal{I}\sqsubseteq D^\mathcal{I}$
++ $\mathcal{I}\models C\equiv D$ iff $C^\mathcal{I}=D^\mathcal{I}$
++ $\mathcal{I}\models \mathcal{T}$ iff $\mathcal{I}$ is a model for all inclusions in $\mathcal{T}$
+
+### followship between inclusion and TBox
++ suppose 
+  + $\mathcal{I}$ an interpretation
+  + $C\sqsubseteq D$ an inclusion
+  + $\mathcal{T}$ a TBox
++ We say $C\sqsubseteq D$ follows from $\mathcal{T}$ when every model of $\mathcal{T}$ is a model for $C\sqsubseteq D$
+  + denoted by $T\models C\sqsubseteq D$ or $C\sqsubseteq_\mathcal{T}D$
 
 ---
 # $\mathcal{ALC}$
-attributive language with complement
+Attributive language with complement
 
 ## Syntax
 + $N_C$: set of concept names
@@ -43,32 +77,18 @@ attributive language with complement
   + $A,B$ for atomic concrpts, $C,D$ for complex
 
 ## Semantics
-![](img/2020-03-03-15-43-17.png)
++ An **interpretation** is a structure $\mathcal{I}=(\Delta^\mathcal{I}, \cdot^\mathcal{I})$
+  + $\Delta^\mathcal{I}$ is the domain
+  + $\cdot^\mathcal{I}$ is a map function
+    + all **concept name** $A\in N_C$ is mapped to a subset $A^\mathcal{I}$ of $\Delta^\mathcal{I}$
+    + role name $r$ is mapped to a binary relation $r^\mathcal{I}$ over $\Delta^\mathcal{I}$
++ inductive definitions
+  + $(C\sqcap D)^\mathcal{I} := C^\mathcal{I}\cap D^\mathcal{I}$
+  + $(C\sqcup D)^\mathcal{I} :=C^\mathcal{I}\cup D^\mathcal{I}$
+  + $(\neg C)^\mathcal{I} := \neg C^\mathcal{I}$
+  + $(\exists r.C)^\mathcal{I}:= \{d\in \Delta^\mathcal{I}|\text{there is }e\in\Delta^\mathcal{I}\text{ with } (d, e)\in r^\mathcal{I} \text{ and } e\in C^\mathcal{I}\}$
+  + $(\forall r.C)^\mathcal{I}:= \{d\in \Delta^\mathcal{I}|\text{for all }e\in\Delta^\mathcal{I}: (d, e)\in r^\mathcal{I} \text{ implies }e\in C^\mathcal{I}\}$
+
 
 例子  
 ![](img/2020-03-03-15-46-15.png)
----
-## Formalization
-### Term Extraction (词汇提取)
-+ 每个词语都有不同的泛用程度，并且它们的单复数形式也不同
-
-### Grouping
-![](img/2020-03-03-14-23-38.png)
-+ **Representations are context sensitive & interest relative**
-
-### Normalise Terms
-+ 将文本中的base term规范化，比如将animals重写为`Animal`，将us根据语义重写为`Human`
-+ 将文本中animal具体的形式转化为形容词
-+ 根据背景知识再增添一些形容词
-
-![](img/2020-03-03-14-32-45.png)
-
-### Organise Terms
-![](img/2020-03-03-14-34-47.png)
-
-> What is a definition?
-> + a statement that describes/fixes the meaning of a term
-> + 可以用两种方法给出一个定义
->   + 描述法（extensional）
->   + 列举法（intensional）：列举法给出的描述必须是判定定义的充要条件
-

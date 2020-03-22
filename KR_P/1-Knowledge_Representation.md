@@ -31,7 +31,7 @@ See [HERE](assets/KR&P-protege_tutorial.pdf)
 
 ## Surrogate
 + **Role 1: A KR is a Surrogate**
-  + Knowledge Representation is a surrogate of the real-world object. Reasoning is an internal process, while the things taht we wish to reason
+  + Knowledge Representation is a surrogate of the real-world object. Reasoning is an internal process, while the things that we wish to reason
   + Surrogates can serves for tangible and intangible objects
   + From this perspective, reasoning itself is a surrogate for action in the real world.
   + All representations are imperfect approximations to reality.

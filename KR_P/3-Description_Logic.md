@@ -25,8 +25,8 @@ Let $A$ be a **concept name** and $C$ a $\mathcal{EL}$ **concept**
 + newly-defined concept names can be used to define other concepts, inductively.
 
 ### $\mathcal{EL}$ Terminology
-+ $\mathcal{EL}$ yerminology is a finite set of definitions of the form $A\equiv C$ and $A\sqsubseteq C$, such that no concept name occurs more than once on the left
-+ So in terminoogy a concept cannot have two distinct definitions
++ $\mathcal{EL}$ terminology is a finite set of definitions of the form $A\equiv C$ and $A\sqsubseteq C$, such that no concept name occurs more than once on the left
++ So in terminology a concept cannot have two distinct definitions
 
 ### $\mathcal{EL}$ concept inclusion
 + $C\sqsubseteq D$ is called a $\mathcal{EL}$ concept inclusion, or C is subsumed by D, or D subsumes C

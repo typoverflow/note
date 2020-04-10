@@ -92,3 +92,26 @@ Attributive language with complement
 
 例子  
 ![](img/2020-03-03-15-46-15.png)
+
+## Concepts Inclusions and TBoxes
+
+## Reaonsing without TBox
++ Two Tasks
+  + Subsumption
+    + To prove the inclusion $C\sqsubseteq D$, iff to prove $\forall$ interpretations $ \mathcal{I} $, we have $ C^\mathcal{I}\subseteq D^\mathcal{I} $, i.e.$ \models C\sqsubseteq D $
+  + Concept Satisfiability
+    + Concept $C$ is satisfiable iff $\exists \mathcal{I} $, $C^\mathcal{I}\not =\emptyset$
+  + Relationship
+    + $\models C\sqsubseteq D$ iff $C\sqcap \neg D$ is satisfiable, thus in $ \mathcal{ALC} $, subsumption is reducible to satisfiability.
++ To decide whether an $ \mathcal{ALC} $ concept is satisfiable is **NPC** question. 
+
+### Example： Trivial Method
+![](img/2020-04-07-14-33-41.png)  
+![](img/2020-04-07-14-36-33.png)
++ 注：
+  + TBox中的知识是Universally True的，这里我们没有进行TBox的推理，而只是利用了TBox中的知识
+  + ABox中的内容是推理的内容
++ 最终什么时候终止（饱和）？
+
+### Tableu Method
+

@@ -20,8 +20,8 @@ Attension： $\exists r.C$中的$C$是修饰$r$的
 
 ### Concept Definition Formats in $\mathcal{EL}$
 Let $A$ be a **concept name** and $C$ a $\mathcal{EL}$ **concept**
-+ $A\equiv C$ is a $\mathcal{EL}$ concept definition. $C$ describes necessary and sufficient conditions for being $A$.
-+ $A\sqsubseteq C$ is a primitive $\mathcal{EL}$ concept definition. $C$ describes necessary conditions for being A. 
++ $A\equiv C$ is a $\mathcal{EL}$ **concept definition**. $C$ describes necessary and sufficient conditions for being $A$.
++ $A\sqsubseteq C$ is a **primitive $\mathcal{EL}$ concept definition**. $C$ describes necessary conditions for being A. 
 + newly-defined concept names can be used to define other concepts, inductively.
 
 ### $\mathcal{EL}$ Terminology
@@ -30,6 +30,9 @@ Let $A$ be a **concept name** and $C$ a $\mathcal{EL}$ **concept**
 
 ### $\mathcal{EL}$ concept inclusion
 + $C\sqsubseteq D$ is called a $\mathcal{EL}$ concept inclusion, or C is subsumed by D, or D subsumes C
++ $C\equiv D$ is called a $\mathcal{EL}$ concept equation
++ actually it is generalised from subsume and equation, for the concept on the left can be complex. 
++ **GCI**
 
 ### $\mathcal{EL}$ TBox
 + A $\mathcal{EL}$ TBOX is a finite set $T$ of $\mathcal{EL}$ concepts inclusions $C\sqsubseteq D$
@@ -88,7 +91,8 @@ Attributive language with complement
   + $(\neg C)^\mathcal{I} := \neg C^\mathcal{I}$
   + $(\exists r.C)^\mathcal{I}:= \{d\in \Delta^\mathcal{I}|\text{there is }e\in\Delta^\mathcal{I}\text{ with } (d, e)\in r^\mathcal{I} \text{ and } e\in C^\mathcal{I}\}$
   + $(\forall r.C)^\mathcal{I}:= \{d\in \Delta^\mathcal{I}|\text{for all }e\in\Delta^\mathcal{I}: (d, e)\in r^\mathcal{I} \text{ implies }e\in C^\mathcal{I}\}$
-
++ model
+  + model是使得Ontology中所有Axiom均为真的解释$ \mathcal{I} $
 
 例子  
 ![](img/2020-03-03-15-46-15.png)

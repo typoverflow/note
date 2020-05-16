@@ -115,7 +115,28 @@ Attributive language with complement
 + 注：
   + TBox中的知识是Universally True的，这里我们没有进行TBox的推理，而只是利用了TBox中的知识
   + ABox中的内容是推理的内容
-+ 最终什么时候终止（饱和）？
++ 最终什么时候终止（饱和）
 
-### Tableu Method
+---
+## Extended $ \mathcal{ALC} $ by Qualified Number Restrictions
+### Number Restriction
+$$\leq_n r.C\quad\quad \geq_n r.C$$
++ $(\leq _n r . C)^{x}=\left\{x \in \Delta^{x}||\left\{y \in \Delta^{x} |(x, y) \in r^{x} \text { and } y \in C^{x}\right\} | \leq n\right\}$
++ $(\geq _n r . C)^{x}=\left\{x \in \Delta^{x}||\left\{y \in \Delta^{x} |(x, y) \in r^{x} \text { and } y \in C^{x}\right\} | \geq n\right\}$
 
+### Unqualified Number Restriction
++ $\leq_n r.\top$, don't pose restriction on the concept of the range
+
+### Inverse Role
++ $(r^-)^ \mathcal{I}=\{(y, x)\in\Delta^\mathcal{I}\times \Delta^\mathcal{I}|(x, y)\in r^\mathcal{I}\} $
+
+### Transitive Role
++ One can all transitive(r) to a TBox to state that the relation $r$ is transtive. Thus, 
++ $ \mathcal{I}\models\text{transtive}(r) $ iff $r^ \mathcal{I} $ is transtive, i.e. for all $x, y, z\in\Delta^ \mathcal{I} $ such that $(x, y)\in r^\mathcal{I} $ and $(y, z)\in r^\mathcal{I} $ we have $(x,z)\in r^\mathcal{I} $
+
+### Hierarchy Role
++ like concept hierarchy, role name can have hierarchy as well. 
+
+### Nominal
++ **nominal**: concept that contain single individuals
++ In $ \mathcal{ALC} $ extended with nominals we can use the $\{a\}$ or $ \{a_1, a_2, ...\}= \{a_1\}\cup\{a_2\}\cup... $ to represent concept

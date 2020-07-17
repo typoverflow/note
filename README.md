@@ -1,7 +1,7 @@
 # :yum: Note
 This repo contains notes of courses for undergraduates in School of AI, Nanjing University.  
 
-艰难困苦，玉汝于成 (Adversity often leads to prosperity). This repo is maintained by [Derek-Gcx](http://github.com/Derek-Gcx) with :heart:, and hopefully you can get some insight from it.
+艰难困苦，玉汝于成 (Adversity often leads to prosperity). This repo is maintained by [Gao Chenxiao](http://github.com/typoverflow) with :heart:, and hopefully you can get some insight from it.
 
 ## :confused: Content
 + **clrs** 

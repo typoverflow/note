@@ -6,8 +6,6 @@ This repo contains notes of courses for undergraduates in School of AI, Nanjing 
 This repo is maintained by [Gao Chenxiao](http://github.com/typoverflow) with :heart:, and hopefully you can get some insight from it.
 
 ## :confused: Content
-+ **clrs** 
-  + solution to 《*Introduction to Algorithms*》
 + **Convex Optimization**
   + Homework solution to assignments and exercises
 + **Database**

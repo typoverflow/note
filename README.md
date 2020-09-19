@@ -8,26 +8,19 @@ This repo is maintained by [Gao Chenxiao](http://github.com/typoverflow) with :h
 ## :confused: Content
 + **Convex Optimization**
   + Homework solution to assignments and exercises
-+ **Database**
-  + course notes
 + **Data Structure and Algorithms**
   + course notes
 + **ics**: *Intro to Computer System*
   + reports for Labs and Project Assignments
-+ **IML**: *Intro to Machine Learning*
-  + course notes
 + **Intelligent System**
   + course notes
-+ **KR_P**: *Knowledge Representation and processing*
-  + course notes 
-+ **linux cmd** 
-  + *an overview of linux commands*
 + **os**: *Operating System*
   + course notes
   + reports for Labs and Project Assignments
 + **Probability and Mathematical Statistics**
   + course notes
-
++ **DSP**: *Digital Signal Processing*
+  + course notes
 ## :grinning: Acknowledge
 + Most of the contents come from the materials provided by course Instructors and TAs. This repo contains a sorted version of these materials and some of my personal ideas.
 + So, plz check these websites to get raw perceptions!

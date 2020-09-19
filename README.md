@@ -1,7 +1,9 @@
 # :yum: Note
 This repo contains notes of courses for undergraduates in School of AI, Nanjing University.  
 
-艰难困苦，玉汝于成 (Adversity often leads to prosperity). This repo is maintained by [Gao Chenxiao](http://github.com/typoverflow) with :heart:, and hopefully you can get some insight from it.
+艰难困苦，玉汝于成 (Adversity often leads to prosperity). 
+
+This repo is maintained by [Gao Chenxiao](http://github.com/typoverflow) with :heart:, and hopefully you can get some insight from it.
 
 ## :confused: Content
 + **clrs** 
@@ -44,5 +46,4 @@ This repo contains notes of courses for undergraduates in School of AI, Nanjing 
     + You can directly install the extension on Windows and MacOS. For Linux users, this [issue page](https://github.com/orsharir/github-mathjax/issues/24) may provide some help.
 + Almost all of the course notes deploy both Chinese and English, because
   + orginal materials are written in English, 
-  + some concepts can be described more precisely in English, 
-  + I am a Chinese student.
+  + some concepts can be described more precisely in English.

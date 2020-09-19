@@ -64,7 +64,7 @@ function REFLEX_AGENT(percept) returns an action
 ### 基于模型的反射Agent
 + 在内部维护模型，预测*现在*的世界应当是什么样子，用于处理部分可观测的环境
 ![](img/2020-02-21-16-10-08.png)
-+ 比如grid world，基于知识推测出当前世界的状态，然后根据简单的条件行为规则（不如不要走有怪兽的格子）来选择自己的行动
++ 比如grid world，基于知识推测出当前世界的状态，然后根据简单的条件行为规则（比如不要走有怪兽的格子）来选择自己的行动
 
 ```python
 function MODEL-BASED-REFLEX-AGENT(percept) return an action

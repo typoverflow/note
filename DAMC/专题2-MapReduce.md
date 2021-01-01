@@ -27,3 +27,25 @@
 + Reverse Web-Link Graph
   + **Map**: Output <target, source> pairs for each link to a target URL found in a page named source
   + **Reduce**: Concate the list of all source URLs associated with a given target URL and emits the pair <target, list(sources)>
+
+## MapReduce并发度分析
+
+## MapReduce的失效处理
++ MapReduce的并行方式同时也提供了从错误或者失效状况中恢复出来的能力
+  + Worker Failure：当某个计算节点或者中间元组存储节点失效时，工作服载可以被master分配到其他单元上
+    + locality：对于一个数据的split，它往往被分配到多个计算节点中（比如worker1和worker2）（此时worker1和worker2在 物理意义上也往往是相近的）。当worker1失效时，master节点将会考虑上述局部性信息，调度worker1附近的worker2进行计算
+  + Master Failure：对于MapReduce这种架构来说，Master节点失效是比较严重的问题
+    + 使用periodic checkpoinits：定期将master节点的操作写入到日志当中
+
+## MapReduce的性能
++ Locality：上文中已经提及，在此略过
++ Task Granularity
+  + 任务粒度：每个计算节点实际上会处理多个Map进程或者Reduce进程
+  + 例子
+    + 使用2000台working machine来处理200000个Map任务和5000个Reduce任务
+    + Map任务数目比Reduce任务数目要多是因为Reduce需要处理的数据已经经过Map的整合归并，相对更容易处理。
+    ![](img/2020-12-11-14-37-58.png)
+  + Backup Task
+    + 任务完成的时间往往取决于最慢的任务
+    + 当一个MapReduce操作快要结束时，master会对剩余的任务调度backup execution（实际上是等到识别出拖后腿的任务后再进行backup）。最终当primary execution或者backup execution中有任意一方完成后，使用它的结果作为MapReduce的结果。
+

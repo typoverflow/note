@@ -4,6 +4,7 @@
   + Players可能没有关于其他玩家的完整信息
   + 玩家之间不知道其他人的收益和成本
   + 有些玩家可能有一些内部消息
++ 这种非完全信息的博弈往往会鼓励player之间的交互
 
 ## Bayesian Games
 ### Settings
@@ -26,15 +27,16 @@ $$a_i=(a_i(\theta_i^1), a_i(\theta_i^2), ..., a_i(\theta_i^{n_i}))$$
   where $p(\theta_{-i}|\theta_i)=p(\theta_i, \theta_{-i})/p(\theta_i)$
 
 ## Bayesian Nash Equilibrium
-+ Definition: The outcome $(a_1, a_2, ...,a_N)$ is a **Bayesian NE** if for each type $\theta_i$, we have
++ **Definition:** The outcome $(a_1, a_2, ...,a_N)$ is a **Bayesian NE**, if for each type $\theta_i$, we have
   $$U_{i}\left(a_{i}\left(\theta_{i}\right), a_{-i}\right) \geq U_{i}\left(a_{i}^{\prime}\left(\theta_{i}\right), a_{-i}\right) \text { for all } a_{i}^{\prime}\left(\theta_{i}\right) \in A_{i}$$
-+ Given $a_{-1}$ and type $\theta_i$, the best reponse for player $i$ is 
++ Given $a_{-i}$ and type $\theta_i$, the best reponse for player $i$ is 
   $$\begin{array}{l}
 B_{i}\left(a_{-i}, \theta_{i}\right)=\left\{a_{i}\left(\theta_{i}\right): U_{i}\left(a_{i}\left(\theta_{i}\right), a_{-i}\right)\right. \\
 \left.\geq U_{i}\left(a_{i}^{\prime}\left(\theta_{i}\right), a_{-i}\right) \text { for all } a_{i}^{\prime}\left(\theta_{i}\right)\right\}
 \end{array}$$
 + **Theorem:** The outcome $(a_1, a_2, ..., a_N)$ is a Bayesian NE iff for every player $i$ and each type $\theta_i$, we have
   $$a_i(\theta_i)\in B_i(a_{-i}, \theta_i)$$
++ 如何寻找Bayesian Nash Equilibrium
 
 ### An example: Bank Runs
 ![](img/2021-04-19-19-33-52.png)

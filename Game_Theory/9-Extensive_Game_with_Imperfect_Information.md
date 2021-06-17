@@ -149,3 +149,23 @@ $$
 + **【Theorems】**
   + Each finite extensive form game with perfect recall has a sequential equilibrium
   + If assessment $(\beta,  \mu)$ is a sequential equilibrium, then $\beta$ is a subgame perfect equilibrium.
+
+
+---
+## 信号传递博弈
++ 信念传递博弈是sequential equilibrium最为重要的应用之一
+
+### 例子：Used-Car market
+![](img/2021-06-07-18-45-51.png)
+
+问题设置
++ 一辆好的二手车价值H，坏的二手车价值L
++ 你不知道车的真实情况，但是车处于好的状态的信念为p
++ 你所感兴趣的车的价格为p
++ 卖家知道车的真实情况
++ 如果车的展示情况不好，那么卖家需要额外花费c来让装修车
++ 假设H>p>L
+
+在下面的讨论中，我们主要关注两种不同的equilibrium
++ Pooling Equilibrium: GC and BC dealer play the same strategy
++ Seperating Equilibrium: GC and BC
